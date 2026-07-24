@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: ParaFi Tech Avalanche Ethereum API
+  version: 1.1.0
+  description: Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.
+  termsOfService: https://parafi.tech/terms
+  contact:
+    name: ParaFi Tech
+    url: https://parafi.tech
+    email: info@parafi.tech
+  license:
+    name: MIT
+servers:
+- url: https://parafi.tech
+  description: Production
+- url: http://localhost:3000
+  description: Local development
+tags:
+- name: Ethereum
+  description: Ethereum network and sidecar metrics.
+paths:
+  /api/ethereum/network-stats:
+    get:
+      tags:
+      - Ethereum
+      summary: Ethereum network statistics (gas, validators, staking, supply)
+      operationId: getEthereumNetworkStats
+      parameters:
+      - name: force
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EthereumNetworkStatsResponse'
+              examples:
+                example:
+                  value:
+                    data:
+                      latestBlock: 19500000
+                      gasPrice:
+                        low: 15
+                        medium: 20
+                        high: 30
+                      baseFee: 12.5
+                      blockTime: 12.1
+                      activeValidators: 950000
+                      totalStakedETH: 32000000
+                      averageStakedPerValidator: 33.7
+                      currentEpoch: 290000
+                      totalETHSupply: 120000000
+                    lastUpdated: 1710000000000
+                    fromCache: true
+        '500':
+          description: Failed to fetch Ethereum network stats
+  /api/ethereum/sidecar-stats:
+    get:
+      tags:
+      - Ethereum
+      summary: Real-time Ethereum network performance metrics
+      operationId: getEthereumSidecarStats
+      parameters:
+      - name: count
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 200
+      - name: smooth
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  series:
+                    type: array
+                    items:
+                      type: object
+                  latest:
+                    type: object
+                  cacheSource:
+                    type: string
+components:
+  schemas:
+    EthereumNetworkStatsResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            latestBlock:
+              type: integer
+            gasPrice:
+              type: object
+              properties:
+                low:
+                  type: number
+                medium:
+                  type: number
+                high:
+                  type: number
+            baseFee:
+              type: number
+            blockTime:
+              type: number
+            activeValidators:
+              type: integer
+            totalStakedETH:
+              type: number
+            averageStakedPerValidator:
+              type: number
+            currentEpoch:
+              type: integer
+            totalETHSupply:
+              type: number
+        lastUpdated:
+          type: integer
+          format: int64
+        fromCache:
+          type: boolean
+        cacheSource:
+          type: string
+      required:
+      - data
+      - lastUpdated
+externalDocs:
+  description: Agent guide and integration entrypoints
+  url: https://parafi.tech/skill.md

@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: ParaFi Tech Avalanche API
+  version: 1.1.0
+  description: Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.
+  termsOfService: https://parafi.tech/terms
+  contact:
+    name: ParaFi Tech
+    url: https://parafi.tech
+    email: info@parafi.tech
+  license:
+    name: MIT
+servers:
+- url: https://parafi.tech
+  description: Production
+- url: http://localhost:3000
+  description: Local development
+tags:
+- name: Avalanche
+  description: Avalanche validator and network supply endpoints.
+paths:
+  /api/avalanche/validators:
+    get:
+      tags:
+      - Avalanche
+      summary: Get Avalanche validators (optionally filter by nodeID)
+      operationId: getAvalancheValidators
+      parameters:
+      - name: nodeID
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: nodeIDs
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma-separated node IDs
+      - name: all
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Return all ParaFi validators
+      - name: force
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvalancheValidatorsResponse'
+        '500':
+          description: Failed to fetch validator data
+  /api/avalanche/supply:
+    get:
+      tags:
+      - Avalanche
+      summary: Get the current AVAX supply used by the staking rewards formula
+      operationId: getAvalancheSupply
+      responses:
+        '200':
+          description: Successful response from a P-Chain Avalanche RPC
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvalancheSupplyResponse'
+        '502':
+          description: The configured and official Avalanche RPCs failed
+components:
+  schemas:
+    AvalancheSupplyResponse:
+      type: object
+      properties:
+        supplyNanoAvax:
+          type: string
+          pattern: ^\d+$
+          description: Current AVAX supply upper bound in nanoAVAX
+        height:
+          type: string
+          description: P-Chain height when supplied by the RPC
+        source:
+          type: string
+          enum:
+          - avalanche-rpc
+      required:
+      - supplyNanoAvax
+      - source
+    AvalancheValidatorsResponse:
+      type: object
+      properties:
+        validators:
+          type: array
+          items:
+            type: object
+        totalValidators:
+          type: integer
+        aggregatedStats:
+          type: object
+        metadata:
+          type: object
+          properties:
+            fetchedAt:
+              type: string
+              format: date-time
+            source:
+              type: string
+            cacheKey:
+              type: string
+        cacheSource:
+          type: string
+          enum:
+          - fresh
+          - redis
+externalDocs:
+  description: Agent guide and integration entrypoints
+  url: https://parafi.tech/skill.md

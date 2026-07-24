@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: ParaFi Tech Avalanche Market API
+  version: 1.1.0
+  description: Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.
+  termsOfService: https://parafi.tech/terms
+  contact:
+    name: ParaFi Tech
+    url: https://parafi.tech
+    email: info@parafi.tech
+  license:
+    name: MIT
+servers:
+- url: https://parafi.tech
+  description: Production
+- url: http://localhost:3000
+  description: Local development
+tags:
+- name: Market
+  description: Token price endpoints for supported assets.
+paths:
+  /api/market/prices:
+    get:
+      tags:
+      - Market
+      summary: Get latest prices (CoinGecko-backed)
+      operationId: getMarketPrices
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PriceData'
+                  lastUpdated:
+                    type: integer
+                    format: int64
+                  fromCache:
+                    type: boolean
+              examples:
+                example:
+                  value:
+                    data:
+                      bitcoin:
+                        usd: 65000
+                      ethereum:
+                        usd: 3200
+                      solana:
+                        usd: 150
+                      aptos:
+                        usd: 9
+                    lastUpdated: 1710000000000
+                    fromCache: true
+components:
+  schemas:
+    SimpleUSD:
+      type: object
+      properties:
+        usd:
+          type: number
+      required:
+      - usd
+    PriceData:
+      type: object
+      additionalProperties: false
+      properties:
+        bitcoin:
+          $ref: '#/components/schemas/SimpleUSD'
+        ethereum:
+          $ref: '#/components/schemas/SimpleUSD'
+        solana:
+          $ref: '#/components/schemas/SimpleUSD'
+        aptos:
+          $ref: '#/components/schemas/SimpleUSD'
+externalDocs:
+  description: Agent guide and integration entrypoints
+  url: https://parafi.tech/skill.md
