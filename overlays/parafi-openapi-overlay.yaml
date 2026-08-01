@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for ParaFi Tech API
+  version: 1.0.0
+extends: openapi/parafi-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-20'
+      x-apievangelist-category: blockchain-staking-data
+      x-apievangelist-auth: none-public-read-only
+      x-agent-ready: true
+      x-agent-resources:
+        llms_txt: https://parafi.tech/llms.txt
+        skill: https://parafi.tech/skill.md
+        openapi: https://parafi.tech/openapi.json

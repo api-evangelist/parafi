@@ -1,0 +1,64 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/parafi-openapi.json
+note: >-
+  Entity graph derived from OpenAPI schemas and the id-reference fields used across
+  the read-only endpoints (vote accounts, stake accounts, staker addresses, epochs).
+entities:
+  - name: Validator
+    id_field: voteAccount
+    also: identity
+    description: A staking validator (ParaFi runs a 0% commission Solana validator).
+    schemas: [APYData, NetworkValidatorsData, ActiveStakeData, TotalStakeData, NetworkAPYData]
+  - name: StakeAccount
+    id_field: stakeAccount
+    description: A delegator's stake account delegated to a validator.
+    schemas: [DelegatorsData]
+  - name: Staker
+    id_field: address
+    also: stakerAuthority
+    description: The wallet/authority that owns one or more stake accounts.
+  - name: RewardEntry
+    id_field: stakeAccount
+    description: Per-epoch reward record (inflation + MEV) for a stake account.
+    schemas: [RewardEntry, SimpleRewardsEpochResponse]
+  - name: Epoch
+    id_field: epochNumber
+    description: A Solana epoch; 'current' resolves to the latest epoch.
+  - name: Network
+    id_field: name
+    description: Supported chains — solana, ethereum, avalanche, aptos.
+    schemas: [NetworkSupplyData, EthereumNetworkStatsResponse, AvalancheValidatorsResponse, AvalancheSupplyResponse]
+  - name: Price
+    id_field: symbol
+    description: CoinGecko-backed token price data.
+    schemas: [PriceData, SimpleUSD]
+relationships:
+  - from: StakeAccount
+    to: Validator
+    kind: belongs_to
+    via: validatorVoteAccount
+  - from: StakeAccount
+    to: Staker
+    kind: belongs_to
+    via: stakerAuthority
+  - from: Staker
+    to: StakeAccount
+    kind: has_many
+    via: address
+  - from: RewardEntry
+    to: StakeAccount
+    kind: belongs_to
+    via: stakeAccount
+  - from: RewardEntry
+    to: Validator
+    kind: belongs_to
+    via: validatorVoteAccount
+  - from: RewardEntry
+    to: Epoch
+    kind: belongs_to
+    via: epochNumber
+  - from: Validator
+    to: Network
+    kind: belongs_to
+    via: network

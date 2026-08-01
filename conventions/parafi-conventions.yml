@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: https://parafi.tech/llms.txt
+authentication:
+  style: none
+  detail: Public read-only API; no API key or credentials required.
+idempotency:
+  supported: false
+  detail: All operations are HTTP GET (read-only); no write operations and no idempotency-key contract.
+pagination:
+  style: page-number
+  params: [page, limit]
+  defaults: {page: 1, limit: 100, max_limit: 500}
+  response_fields: [page, limit, totalPages, totalCount, hasNext, hasPrev]
+  schema: openapi/parafi-openapi.json#/components/schemas/Pagination
+filtering_sorting:
+  params: [sortBy, sortOrder, startEpoch, endEpoch, startDate, endDate, days, hours, window, granularity, interval, stakeAccount, validatorVoteAccount, nodeID, nodeIDs, minReward, maxReward, includeInactive]
+caching:
+  detail: >-
+    Many endpoints return cache metadata fields (cacheSource, fromCache, isStale, lastUpdated).
+    A force=true query param bypasses cache on supported endpoints.
+  fields: [cacheSource, fromCache, isStale, lastUpdated]
+  force_refresh_param: force
+numeric_precision:
+  detail: Large numeric values (rewards, stake amounts) are returned as strings to avoid precision loss.
+versioning:
+  scheme: semver
+  current: '1.1.0'
+  link: lifecycle/parafi-lifecycle.yml
+error_envelope:
+  format: custom
+  detail: JSON object with an error message field; not RFC 9457 problem+json.
+  link: errors/parafi-problem-types.yml
+rate_limiting:
+  detail: No documented rate-limit headers or published quotas found.
+special_values:
+  epoch: Use current as the epoch on epoch-based rewards routes for the latest epoch.

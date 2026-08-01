@@ -1,0 +1,244 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/parafi-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 23
+  by_action_class:
+    connected: 23
+  by_consequence:
+    read: 23
+  human_in_the_loop_required: 0
+operations:
+- path: /api/market/prices
+  method: get
+  operationId: getMarketPrices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/validator-apy
+  method: get
+  operationId: getSolanaValidatorApy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/network-validators
+  method: get
+  operationId: getSolanaNetworkValidators
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/supply
+  method: get
+  operationId: getSolanaSupply
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/simple-rewards/epoch/{epochNumber}
+  method: get
+  operationId: getSolanaSimpleRewardsByEpoch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/avalanche/validators
+  method: get
+  operationId: getAvalancheValidators
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/avalanche/supply
+  method: get
+  operationId: getAvalancheSupply
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/network-apy
+  method: get
+  operationId: getSolanaNetworkApy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/validator-active-stake
+  method: get
+  operationId: getSolanaValidatorActiveStake
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/validator-stake
+  method: get
+  operationId: getSolanaValidatorStake
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/validator-delegators
+  method: get
+  operationId: getSolanaValidatorDelegators
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/rewards/staker/{address}
+  method: get
+  operationId: getSolanaStakerRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/rewards/validator/{voteAccount}
+  method: get
+  operationId: getSolanaValidatorRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/rewards/epoch/{epochNumber}
+  method: get
+  operationId: getSolanaEpochRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/mev-rewards
+  method: get
+  operationId: getSolanaMevRewards
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/compute-units
+  method: get
+  operationId: getSolanaComputeUnits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/compute-units/history
+  method: get
+  operationId: getSolanaComputeUnitsHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/leader-slots
+  method: get
+  operationId: getSolanaLeaderSlots
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/sidecar-stats
+  method: get
+  operationId: getSolanaSidecarStats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/network-stats/history
+  method: get
+  operationId: getSolanaNetworkStatsHistory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/solana/delegators
+  method: get
+  operationId: getSolanaDelegators
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/ethereum/network-stats
+  method: get
+  operationId: getEthereumNetworkStats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/ethereum/sidecar-stats
+  method: get
+  operationId: getEthereumSidecarStats
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

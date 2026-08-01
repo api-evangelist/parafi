@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/parafi-openapi.json
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: Provider publishes OpenAPI 3.0.3 at https://parafi.tech/openapi.json
+  - id: rest-json
+    conforms: true
+    evidence: All 23 operations are HTTP GET returning application/json
+  - id: pagination
+    conforms: true
+    evidence: page/limit query params + Pagination schema (page,limit,totalPages,totalCount,hasNext,hasPrev)
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 4xx/5xx responses use plain descriptions, not application/problem+json
+  - id: oauth2
+    conforms: false
+    evidence: No securitySchemes; API is public and unauthenticated
+  - id: idempotency
+    conforms: false
+    evidence: Read-only API (all GET); no idempotency-key contract
+  - id: llms-txt
+    conforms: true
+    evidence: Publishes /llms.txt, /llms-full.txt, and /skill.md agent guide

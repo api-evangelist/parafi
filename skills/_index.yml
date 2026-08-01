@@ -1,0 +1,11 @@
+generated: '2026-07-20'
+method: searched
+source: https://parafi.tech/skill.md
+skills:
+  - file: parafi-tech.md
+    name: ParaFi Tech staking-data agent guide
+    api: openapi/parafi-openapi.json
+    description: >-
+      Provider-published Agent Skill (skill.md) for querying ParaFi validator APY, rewards,
+      MEV data, network stats, and token prices across Solana, Ethereum, Avalanche, and Aptos.
+    operations: [getSolanaValidatorApy, getSolanaNetworkApy, getSolanaStakerRewards, getSolanaEpochRewards, getSolanaMevRewards, getSolanaSidecarStats, getEthereumNetworkStats, getAvalancheValidators, getMarketPrices]

@@ -1,0 +1,1097 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ParaFi Tech API",
+    "version": "1.1.0",
+    "description": "Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.",
+    "termsOfService": "https://parafi.tech/terms",
+    "contact": {
+      "name": "ParaFi Tech",
+      "url": "https://parafi.tech",
+      "email": "info@parafi.tech"
+    },
+    "license": { "name": "MIT" }
+  },
+  "servers": [
+    { "url": "https://parafi.tech", "description": "Production" },
+    { "url": "http://localhost:3000", "description": "Local development" }
+  ],
+  "tags": [
+    { "name": "Market", "description": "Token price endpoints for supported assets." },
+    { "name": "Solana", "description": "ParaFi validator, rewards, stake, and Solana network endpoints." },
+    { "name": "Ethereum", "description": "Ethereum network and sidecar metrics." },
+    { "name": "Avalanche", "description": "Avalanche validator and network supply endpoints." }
+  ],
+  "externalDocs": {
+    "description": "Agent guide and integration entrypoints",
+    "url": "https://parafi.tech/skill.md"
+  },
+  "paths": {
+    "/api/market/prices": {
+      "get": {
+        "tags": ["Market"],
+        "summary": "Get latest prices (CoinGecko-backed)",
+        "operationId": "getMarketPrices",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": { "$ref": "#/components/schemas/PriceData" },
+                    "lastUpdated": { "type": "integer", "format": "int64" },
+                    "fromCache": { "type": "boolean" }
+                  }
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "data": {
+                        "bitcoin": { "usd": 65000 },
+                        "ethereum": { "usd": 3200 },
+                        "solana": { "usd": 150 },
+                        "aptos": { "usd": 9 }
+                      },
+                      "lastUpdated": 1710000000000,
+                      "fromCache": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/solana/validator-apy": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Get validator APY/APR with MEV contribution and status",
+        "operationId": "getSolanaValidatorApy",
+        "parameters": [
+          {
+            "name": "epoch",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "minimum": 0 },
+            "description": "Override epoch for calculation (default: current)"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean", "default": false },
+            "description": "Bypass cache if true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/APYData" }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch APY data" }
+        }
+      }
+    },
+    "/api/solana/network-validators": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Network-wide validator counts and RPC nodes",
+        "operationId": "getSolanaNetworkValidators",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean", "default": false },
+            "description": "Bypass cache if true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NetworkValidatorsData" }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch validator data" }
+        }
+      }
+    },
+    "/api/solana/supply": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Solana supply metrics",
+        "operationId": "getSolanaSupply",
+        "parameters": [
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "boolean", "default": false },
+            "description": "Bypass cache if true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NetworkSupplyData" }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch supply data" }
+        }
+      }
+    },
+    "/api/solana/simple-rewards/epoch/{epochNumber}": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Delegator rewards for an epoch (supports 'current')",
+        "operationId": "getSolanaSimpleRewardsByEpoch",
+        "parameters": [
+          {
+            "name": "epochNumber",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "pattern": "^(\\d+|current)$" },
+            "description": "Epoch number or 'current'"
+          },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 1000, "default": 1 } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 500, "default": 100 } },
+          { "name": "sortBy", "in": "query", "schema": { "type": "string", "enum": ["rewards", "staker", "validator", "stake", "stakeAmount"], "default": "rewards" } },
+          { "name": "sortOrder", "in": "query", "schema": { "type": "string", "enum": ["asc", "desc"], "default": "desc" } },
+          { "name": "minReward", "in": "query", "schema": { "type": "number" } },
+          { "name": "maxReward", "in": "query", "schema": { "type": "number" } },
+          { "name": "validatorVoteAccount", "in": "query", "schema": { "type": "string" }, "description": "Solana vote account public key" },
+          { "name": "includeInactive", "in": "query", "schema": { "type": "boolean", "default": false } },
+          { "name": "force", "in": "query", "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SimpleRewardsEpochResponse" }
+              }
+            }
+          },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/avalanche/validators": {
+      "get": {
+        "tags": ["Avalanche"],
+        "summary": "Get Avalanche validators (optionally filter by nodeID)",
+        "operationId": "getAvalancheValidators",
+        "parameters": [
+          { "name": "nodeID", "in": "query", "required": false, "schema": { "type": "string" } },
+          { "name": "nodeIDs", "in": "query", "required": false, "schema": { "type": "string" }, "description": "Comma-separated node IDs" },
+          { "name": "all", "in": "query", "required": false, "schema": { "type": "boolean" }, "description": "Return all ParaFi validators" },
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AvalancheValidatorsResponse" }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch validator data" }
+        }
+      }
+    },
+    "/api/avalanche/supply": {
+      "get": {
+        "tags": ["Avalanche"],
+        "summary": "Get the current AVAX supply used by the staking rewards formula",
+        "operationId": "getAvalancheSupply",
+        "responses": {
+          "200": {
+            "description": "Successful response from a P-Chain Avalanche RPC",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AvalancheSupplyResponse" }
+              }
+            }
+          },
+          "502": { "description": "The configured and official Avalanche RPCs failed" }
+        }
+      }
+    },
+    "/api/solana/network-apy": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Network-wide average APY across all validators",
+        "operationId": "getSolanaNetworkApy",
+        "parameters": [
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NetworkAPYData" },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "apy": 7.45,
+                      "inflationAPY": 6.8,
+                      "mevAPY": 0.65,
+                      "averageCommission": 7.2,
+                      "stakingRatio": 65.4,
+                      "lastUpdated": "2025-01-28T12:00:00.000Z",
+                      "cacheSource": "redis"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch network APY" }
+        }
+      }
+    },
+    "/api/solana/validator-active-stake": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Validator active stake, commission, vote status",
+        "operationId": "getSolanaValidatorActiveStake",
+        "parameters": [
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ActiveStakeData" },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "activeStake": 5200000000000,
+                      "activeStakeInSol": 5200.0,
+                      "commission": 0,
+                      "lastVote": 312000000,
+                      "epochVoteAccount": true,
+                      "delinquent": false,
+                      "lastUpdated": "2025-01-28T12:00:00.000Z",
+                      "cacheSource": "redis"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch active stake" }
+        }
+      }
+    },
+    "/api/solana/validator-stake": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Total stake breakdown with delegator counts",
+        "operationId": "getSolanaValidatorStake",
+        "parameters": [
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TotalStakeData" },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "totalStake": 5500000000000,
+                      "totalStakeInSol": 5500.0,
+                      "totalStakeAccounts": 150,
+                      "activeStakeAccounts": 145,
+                      "delegatorCount": 120,
+                      "activeStake": 5200000000000,
+                      "inactiveStake": 300000000000,
+                      "lastUpdated": "2025-01-28T12:00:00.000Z",
+                      "cacheSource": "redis"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch stake data" }
+        }
+      }
+    },
+    "/api/solana/validator-delegators": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "List all delegators with stake amounts",
+        "operationId": "getSolanaValidatorDelegators",
+        "description": "Returns the current stake-account level delegator list for the ParaFi validator, along with aggregate totals such as active stake accounts and delegator count.",
+        "parameters": [
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DelegatorsData" },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "delegators": [
+                        {
+                          "stakeAccount": "ExampleStakeAccount111111111111111111111111111",
+                          "stakerAuthority": "ExampleStaker1111111111111111111111111111111111",
+                          "activeStake": "125000000000"
+                        }
+                      ],
+                      "totalStake": 5500000000000,
+                      "totalStakeInSol": 5500,
+                      "totalStakeAccounts": 150,
+                      "activeStakeAccounts": 145,
+                      "delegatorCount": 120,
+                      "lastUpdated": "2025-01-28T12:00:00.000Z",
+                      "cacheSource": "redis"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch delegator data" }
+        }
+      }
+    },
+    "/api/solana/rewards/staker/{address}": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Reward history for a specific staker address",
+        "operationId": "getSolanaStakerRewards",
+        "description": "Use this route to retrieve reward history and summary information for a wallet or staker authority across epochs.",
+        "parameters": [
+          { "name": "address", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Staker wallet address" },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "minimum": 1, "default": 1 } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 500, "default": 100 } },
+          { "name": "startEpoch", "in": "query", "schema": { "type": "integer" } },
+          { "name": "endEpoch", "in": "query", "schema": { "type": "integer" } },
+          { "name": "stakeAccount", "in": "query", "schema": { "type": "string" }, "description": "Filter by specific stake account" },
+          { "name": "force", "in": "query", "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "stakerProfile": { "type": "object" },
+                    "rewards": { "type": "array", "items": { "type": "object" } },
+                    "summary": { "type": "object" }
+                  }
+                },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "stakerProfile": {
+                        "address": "ExampleStaker1111111111111111111111111111111111"
+                      },
+                      "rewards": [
+                        {
+                          "epoch": 750,
+                          "stakeAccount": "ExampleStakeAccount111111111111111111111111111",
+                          "totalRewardsActual": "123456789"
+                        }
+                      ],
+                      "summary": {
+                        "totalRewards": "123456789",
+                        "epochsTracked": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid address" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/solana/rewards/validator/{voteAccount}": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Reward distribution for all delegators of a validator",
+        "operationId": "getSolanaValidatorRewards",
+        "parameters": [
+          { "name": "voteAccount", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Validator vote account address" },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "minimum": 1, "default": 1 } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 500, "default": 100 } },
+          { "name": "startEpoch", "in": "query", "schema": { "type": "integer" } },
+          { "name": "endEpoch", "in": "query", "schema": { "type": "integer" } },
+          { "name": "force", "in": "query", "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "validatorInfo": { "type": "object" },
+                    "rewardsDistribution": { "type": "array", "items": { "type": "object" } },
+                    "performanceMetrics": { "type": "object" },
+                    "summary": { "type": "object" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Invalid vote account" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/solana/rewards/epoch/{epochNumber}": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "All delegator rewards for a specific epoch",
+        "operationId": "getSolanaEpochRewards",
+        "parameters": [
+          { "name": "epochNumber", "in": "path", "required": true, "schema": { "type": "string", "pattern": "^(\\d+|current)$" }, "description": "Epoch number or 'current'" },
+          { "name": "page", "in": "query", "schema": { "type": "integer", "minimum": 1, "default": 1 } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 500, "default": 100 } },
+          { "name": "sortBy", "in": "query", "schema": { "type": "string", "enum": ["rewards", "staker", "validator", "stake", "stakeAmount"], "default": "rewards" } },
+          { "name": "sortOrder", "in": "query", "schema": { "type": "string", "enum": ["asc", "desc"], "default": "desc" } },
+          { "name": "validatorVoteAccount", "in": "query", "schema": { "type": "string" }, "description": "Filter by validator" },
+          { "name": "includeInactive", "in": "query", "schema": { "type": "boolean", "default": false } },
+          { "name": "force", "in": "query", "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SimpleRewardsEpochResponse" }
+              }
+            }
+          },
+          "400": { "description": "Validation error" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/solana/mev-rewards": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "MEV rewards from Jito for a range of epochs",
+        "operationId": "getSolanaMevRewards",
+        "parameters": [
+          { "name": "startEpoch", "in": "query", "required": true, "schema": { "type": "integer" } },
+          { "name": "endEpoch", "in": "query", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "epochs": { "type": "array", "items": { "type": "object" } },
+                    "rewards": { "type": "object" },
+                    "metadata": { "type": "object" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Missing startEpoch or endEpoch" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/solana/compute-units": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Current block compute units utilization",
+        "operationId": "getSolanaComputeUnits",
+        "parameters": [
+          { "name": "slot", "in": "query", "required": false, "schema": { "type": "integer" }, "description": "Specific slot (default: latest)" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ComputeUnitsData" },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "slot": 312000000,
+                      "computeUnitsConsumed": 35000000,
+                      "computeUnitsTotal": 48000000,
+                      "utilizationPercentage": 72.9,
+                      "timestamp": "2025-01-28T12:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch compute units" }
+        }
+      }
+    },
+    "/api/solana/compute-units/history": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Historical compute units utilization time series",
+        "operationId": "getSolanaComputeUnitsHistory",
+        "parameters": [
+          { "name": "interval", "in": "query", "schema": { "type": "integer", "enum": [1, 5, 15, 60] }, "description": "Rollup interval in minutes" },
+          { "name": "window", "in": "query", "schema": { "type": "integer", "maximum": 1440 }, "description": "Number of data points" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of [timestamp, utilization] tuples",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": { "type": "number" },
+                    "minItems": 2,
+                    "maxItems": 2
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/solana/leader-slots": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Leader slot statistics (blocks produced, missed, skip rate)",
+        "operationId": "getSolanaLeaderSlots",
+        "parameters": [
+          { "name": "epoch", "in": "query", "required": false, "schema": { "type": "integer" } },
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LeaderSlotsData" },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "totalLeaderSlots": 48,
+                      "blocksProduced": 47,
+                      "blocksMissed": 1,
+                      "skipRate": 2.08,
+                      "epoch": 750,
+                      "lastUpdated": "2025-01-28T12:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/solana/sidecar-stats": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Real-time network performance (TPS, block time, compute units)",
+        "operationId": "getSolanaSidecarStats",
+        "parameters": [
+          { "name": "count", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 200 }, "description": "Number of data points" },
+          { "name": "smooth", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 25 }, "description": "Smoothing window" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "series": { "type": "array", "items": { "type": "object" } },
+                    "latest": { "type": "object" },
+                    "cacheSource": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/solana/network-stats/history": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "Historical network performance (TPS, block time, compute utilization)",
+        "operationId": "getSolanaNetworkStatsHistory",
+        "parameters": [
+          { "name": "granularity", "in": "query", "schema": { "type": "string", "enum": ["hourly", "daily"] } },
+          { "name": "days", "in": "query", "schema": { "type": "integer", "maximum": 365 } },
+          { "name": "hours", "in": "query", "schema": { "type": "integer", "maximum": 168 } },
+          { "name": "startDate", "in": "query", "schema": { "type": "string", "format": "date-time" } },
+          { "name": "endDate", "in": "query", "schema": { "type": "string", "format": "date-time" } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "granularity": { "type": "string" },
+                    "startDate": { "type": "string" },
+                    "endDate": { "type": "string" },
+                    "count": { "type": "integer" },
+                    "data": { "type": "array", "items": { "type": "object" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/solana/delegators": {
+      "get": {
+        "tags": ["Solana"],
+        "summary": "All delegators with stake amounts and account details",
+        "operationId": "getSolanaDelegators",
+        "parameters": [
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DelegatorsData" }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch delegators" }
+        }
+      }
+    },
+    "/api/ethereum/network-stats": {
+      "get": {
+        "tags": ["Ethereum"],
+        "summary": "Ethereum network statistics (gas, validators, staking, supply)",
+        "operationId": "getEthereumNetworkStats",
+        "parameters": [
+          { "name": "force", "in": "query", "required": false, "schema": { "type": "boolean", "default": false } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/EthereumNetworkStatsResponse" },
+                "examples": {
+                  "example": {
+                    "value": {
+                      "data": {
+                        "latestBlock": 19500000,
+                        "gasPrice": { "low": 15, "medium": 20, "high": 30 },
+                        "baseFee": 12.5,
+                        "blockTime": 12.1,
+                        "activeValidators": 950000,
+                        "totalStakedETH": 32000000,
+                        "averageStakedPerValidator": 33.7,
+                        "currentEpoch": 290000,
+                        "totalETHSupply": 120000000
+                      },
+                      "lastUpdated": 1710000000000,
+                      "fromCache": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": { "description": "Failed to fetch Ethereum network stats" }
+        }
+      }
+    },
+    "/api/ethereum/sidecar-stats": {
+      "get": {
+        "tags": ["Ethereum"],
+        "summary": "Real-time Ethereum network performance metrics",
+        "operationId": "getEthereumSidecarStats",
+        "parameters": [
+          { "name": "count", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 200 } },
+          { "name": "smooth", "in": "query", "schema": { "type": "integer", "minimum": 1, "maximum": 25 } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "series": { "type": "array", "items": { "type": "object" } },
+                    "latest": { "type": "object" },
+                    "cacheSource": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PriceData": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "bitcoin": { "$ref": "#/components/schemas/SimpleUSD" },
+          "ethereum": { "$ref": "#/components/schemas/SimpleUSD" },
+          "solana": { "$ref": "#/components/schemas/SimpleUSD" },
+          "aptos": { "$ref": "#/components/schemas/SimpleUSD" }
+        }
+      },
+      "SimpleUSD": {
+        "type": "object",
+        "properties": { "usd": { "type": "number" } },
+        "required": ["usd"]
+      },
+      "APYData": {
+        "type": "object",
+        "properties": {
+          "apy": { "type": "number" },
+          "apr": { "type": "number" },
+          "epoch": { "type": "integer" },
+          "hasMevData": { "type": "boolean" },
+          "inflationRewards": { "type": "number" },
+          "mevRewards": { "type": "number" },
+          "totalRewards": { "type": "number" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string", "enum": ["redis", "fresh"] },
+          "dataSource": { "type": "string", "enum": ["calculated", "estimated"] },
+          "mevDataAge": { "type": "string", "enum": ["current", "previous", "fallback"] }
+        },
+        "required": ["apy", "apr", "epoch", "hasMevData", "inflationRewards", "mevRewards", "totalRewards", "lastUpdated", "dataSource"]
+      },
+      "NetworkValidatorsData": {
+        "type": "object",
+        "properties": {
+          "activeValidators": { "type": "integer" },
+          "totalValidators": { "type": "integer" },
+          "delinquentValidators": { "type": "integer" },
+          "activePercentage": { "type": "number" },
+          "rpcNodes": { "type": "integer" },
+          "totalNodes": { "type": "integer" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string", "enum": ["redis", "fresh"] },
+          "isStale": { "type": "boolean" }
+        },
+        "required": ["activeValidators", "totalValidators", "delinquentValidators", "activePercentage", "rpcNodes", "totalNodes", "lastUpdated"]
+      },
+      "NetworkSupplyData": {
+        "type": "object",
+        "properties": {
+          "circulating": { "type": "integer", "description": "Lamports" },
+          "nonCirculating": { "type": "integer", "description": "Lamports" },
+          "total": { "type": "integer", "description": "Lamports" },
+          "circulatingSOL": { "type": "number" },
+          "nonCirculatingSOL": { "type": "number" },
+          "totalSOL": { "type": "number" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string", "enum": ["redis", "fresh"] },
+          "isStale": { "type": "boolean" }
+        },
+        "required": ["circulating", "nonCirculating", "total", "circulatingSOL", "nonCirculatingSOL", "totalSOL", "lastUpdated"]
+      },
+      "SimpleRewardsEpochResponse": {
+        "type": "object",
+        "properties": {
+          "epochInfo": {
+            "type": "object",
+            "properties": {
+              "epoch": { "type": "integer" },
+              "totalParticipants": { "type": "integer" },
+              "totalRewardsDistributed": { "type": "string" },
+              "totalStakeActive": { "type": "string" },
+              "averageRewardPerParticipant": { "type": "string" },
+              "uniqueValidators": { "type": "integer" },
+              "uniqueStakers": { "type": "integer" },
+              "rewardConsistency": { "type": "integer" }
+            }
+          },
+          "rewardsData": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/RewardEntry" }
+              },
+              "pagination": { "$ref": "#/components/schemas/Pagination" }
+            }
+          },
+          "statistics": {
+            "type": "object",
+            "properties": {
+              "totalRewards": { "type": "string" },
+              "totalStake": { "type": "string" },
+              "averageReward": { "type": "string" },
+              "medianReward": { "type": "string" },
+              "rewardDistribution": { "type": "array", "items": { "type": "number" } },
+              "topStakers": { "type": "array", "items": { "type": "object" } },
+              "topValidators": { "type": "array", "items": { "type": "object" } }
+            }
+          },
+          "dataQuality": {
+            "type": "object",
+            "properties": {
+              "totalSnapshots": { "type": "integer" },
+              "completeData": { "type": "integer" },
+              "preliminaryData": { "type": "integer" },
+              "dataCompletenessPercentage": { "type": "integer" },
+              "mevDataTiming": {
+                "type": "object",
+                "properties": {
+                  "percentageWithMev": { "type": "integer" },
+                  "recordsWithMev": { "type": "integer" },
+                  "pendingMevRecords": { "type": "integer" },
+                  "estimatedNextMevUpdate": { "type": "string", "format": "date-time" }
+                }
+              },
+              "validationAccuracy": { "type": "integer" }
+            }
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "calculationMethod": { "type": "string", "enum": ["balance_difference"] },
+              "cacheSource": { "type": "string", "enum": ["fresh", "redis"] },
+              "lastUpdated": { "type": "string", "format": "date-time" }
+            }
+          }
+        }
+      },
+      "RewardEntry": {
+        "type": "object",
+        "properties": {
+          "stakeAccount": { "type": "string" },
+          "stakerAuthority": { "type": "string" },
+          "validatorVoteAccount": { "type": "string" },
+          "totalRewardsActual": { "type": "string" },
+          "inflationRewards": { "type": "string", "nullable": true },
+          "mevRewards": { "type": "string", "nullable": true },
+          "mevAvailabilityStatus": { "type": "string", "enum": ["available", "pending"] },
+          "dataCompleteness": { "type": "string" },
+          "dataStatus": {
+            "type": "object",
+            "properties": {
+              "balanceDataComplete": { "type": "boolean" },
+              "inflationDataComplete": { "type": "boolean" },
+              "mevDataComplete": { "type": "boolean" }
+            }
+          },
+          "validation": {
+            "type": "object",
+            "properties": {
+              "balanceMatchesRPC": { "type": "boolean" },
+              "calculationAccuracy": { "type": "string" },
+              "confidenceScore": { "type": "integer" },
+              "dataFreshnessScore": { "type": "integer" }
+            }
+          },
+          "activeStake": { "type": "string" },
+          "delegatedStake": { "type": "string" },
+          "activationEpoch": { "type": "integer" },
+          "deactivationEpoch": { "type": "integer", "nullable": true },
+          "calculationMethod": { "type": "string", "enum": ["balance_difference"] }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "integer" },
+          "limit": { "type": "integer" },
+          "totalPages": { "type": "integer" },
+          "totalCount": { "type": "integer" },
+          "hasNext": { "type": "boolean" },
+          "hasPrev": { "type": "boolean" }
+        }
+      },
+      "AvalancheValidatorsResponse": {
+        "type": "object",
+        "properties": {
+          "validators": { "type": "array", "items": { "type": "object" } },
+          "totalValidators": { "type": "integer" },
+          "aggregatedStats": { "type": "object" },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "fetchedAt": { "type": "string", "format": "date-time" },
+              "source": { "type": "string" },
+              "cacheKey": { "type": "string" }
+            }
+          },
+          "cacheSource": { "type": "string", "enum": ["fresh", "redis"] }
+        }
+      },
+      "AvalancheSupplyResponse": {
+        "type": "object",
+        "properties": {
+          "supplyNanoAvax": { "type": "string", "pattern": "^\\d+$", "description": "Current AVAX supply upper bound in nanoAVAX" },
+          "height": { "type": "string", "description": "P-Chain height when supplied by the RPC" },
+          "source": { "type": "string", "enum": ["avalanche-rpc"] }
+        },
+        "required": ["supplyNanoAvax", "source"]
+      },
+      "NetworkAPYData": {
+        "type": "object",
+        "properties": {
+          "apy": { "type": "number" },
+          "inflationAPY": { "type": "number" },
+          "mevAPY": { "type": "number" },
+          "averageCommission": { "type": "number" },
+          "stakingRatio": { "type": "number" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string", "enum": ["redis", "fresh"] },
+          "isStale": { "type": "boolean" }
+        },
+        "required": ["apy", "inflationAPY", "mevAPY", "averageCommission", "stakingRatio", "lastUpdated"]
+      },
+      "ActiveStakeData": {
+        "type": "object",
+        "properties": {
+          "activeStake": { "type": "integer", "description": "Lamports" },
+          "activeStakeInSol": { "type": "number" },
+          "commission": { "type": "integer" },
+          "lastVote": { "type": "integer" },
+          "epochVoteAccount": { "type": "boolean" },
+          "delinquent": { "type": "boolean" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string", "enum": ["redis", "fresh"] },
+          "isStale": { "type": "boolean" }
+        },
+        "required": ["activeStake", "activeStakeInSol", "commission", "lastVote", "epochVoteAccount", "delinquent", "lastUpdated"]
+      },
+      "TotalStakeData": {
+        "type": "object",
+        "properties": {
+          "totalStake": { "type": "integer", "description": "Lamports" },
+          "totalStakeInSol": { "type": "number" },
+          "totalStakeAccounts": { "type": "integer" },
+          "activeStakeAccounts": { "type": "integer" },
+          "delegatorCount": { "type": "integer" },
+          "activeStake": { "type": "integer" },
+          "inactiveStake": { "type": "integer" },
+          "delegatedStake": { "type": "integer" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string", "enum": ["redis", "fresh"] },
+          "isStale": { "type": "boolean" }
+        },
+        "required": ["totalStake", "totalStakeInSol", "totalStakeAccounts", "activeStakeAccounts", "delegatorCount", "lastUpdated"]
+      },
+      "DelegatorsData": {
+        "type": "object",
+        "properties": {
+          "delegators": { "type": "array", "items": { "type": "object" } },
+          "totalStake": { "type": "integer" },
+          "totalStakeInSol": { "type": "number" },
+          "totalStakeAccounts": { "type": "integer" },
+          "activeStakeAccounts": { "type": "integer" },
+          "delegatorCount": { "type": "integer" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string", "enum": ["redis", "fresh"] },
+          "isStale": { "type": "boolean" }
+        },
+        "required": ["delegators", "totalStake", "delegatorCount", "lastUpdated"]
+      },
+      "ComputeUnitsData": {
+        "type": "object",
+        "properties": {
+          "slot": { "type": "integer" },
+          "computeUnitsConsumed": { "type": "integer" },
+          "computeUnitsTotal": { "type": "integer" },
+          "utilizationPercentage": { "type": "number" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        },
+        "required": ["slot", "computeUnitsConsumed", "computeUnitsTotal", "utilizationPercentage"]
+      },
+      "LeaderSlotsData": {
+        "type": "object",
+        "properties": {
+          "totalLeaderSlots": { "type": "integer" },
+          "blocksProduced": { "type": "integer" },
+          "blocksMissed": { "type": "integer" },
+          "skipRate": { "type": "number" },
+          "epoch": { "type": "integer" },
+          "lastUpdated": { "type": "string", "format": "date-time" },
+          "cacheSource": { "type": "string" }
+        },
+        "required": ["totalLeaderSlots", "blocksProduced", "blocksMissed", "skipRate", "epoch"]
+      },
+      "EthereumNetworkStatsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "latestBlock": { "type": "integer" },
+              "gasPrice": {
+                "type": "object",
+                "properties": {
+                  "low": { "type": "number" },
+                  "medium": { "type": "number" },
+                  "high": { "type": "number" }
+                }
+              },
+              "baseFee": { "type": "number" },
+              "blockTime": { "type": "number" },
+              "activeValidators": { "type": "integer" },
+              "totalStakedETH": { "type": "number" },
+              "averageStakedPerValidator": { "type": "number" },
+              "currentEpoch": { "type": "integer" },
+              "totalETHSupply": { "type": "number" }
+            }
+          },
+          "lastUpdated": { "type": "integer", "format": "int64" },
+          "fromCache": { "type": "boolean" },
+          "cacheSource": { "type": "string" }
+        },
+        "required": ["data", "lastUpdated"]
+      }
+    }
+  }
+}

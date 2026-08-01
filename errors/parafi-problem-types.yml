@@ -1,0 +1,74 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/parafi-openapi.json
+format: custom
+envelope: >-
+  Errors return a JSON object with an error message field and an HTTP status code;
+  responses are not RFC 9457 problem+json.
+problems:
+  - status: 500
+    title: "Failed to fetch APY data"
+    source_operation: openapi/parafi-openapi.json#getSolanaValidatorApy
+  - status: 500
+    title: "Failed to fetch validator data"
+    source_operation: openapi/parafi-openapi.json#getSolanaNetworkValidators
+  - status: 500
+    title: "Failed to fetch supply data"
+    source_operation: openapi/parafi-openapi.json#getSolanaSupply
+  - status: 400
+    title: "Validation error"
+    source_operation: openapi/parafi-openapi.json#getSolanaSimpleRewardsByEpoch
+  - status: 500
+    title: "Internal server error"
+    source_operation: openapi/parafi-openapi.json#getSolanaSimpleRewardsByEpoch
+  - status: 500
+    title: "Failed to fetch validator data"
+    source_operation: openapi/parafi-openapi.json#getAvalancheValidators
+  - status: 502
+    title: "The configured and official Avalanche RPCs failed"
+    source_operation: openapi/parafi-openapi.json#getAvalancheSupply
+  - status: 500
+    title: "Failed to fetch network APY"
+    source_operation: openapi/parafi-openapi.json#getSolanaNetworkApy
+  - status: 500
+    title: "Failed to fetch active stake"
+    source_operation: openapi/parafi-openapi.json#getSolanaValidatorActiveStake
+  - status: 500
+    title: "Failed to fetch stake data"
+    source_operation: openapi/parafi-openapi.json#getSolanaValidatorStake
+  - status: 500
+    title: "Failed to fetch delegator data"
+    source_operation: openapi/parafi-openapi.json#getSolanaValidatorDelegators
+  - status: 400
+    title: "Invalid address"
+    source_operation: openapi/parafi-openapi.json#getSolanaStakerRewards
+  - status: 500
+    title: "Internal server error"
+    source_operation: openapi/parafi-openapi.json#getSolanaStakerRewards
+  - status: 400
+    title: "Invalid vote account"
+    source_operation: openapi/parafi-openapi.json#getSolanaValidatorRewards
+  - status: 500
+    title: "Internal server error"
+    source_operation: openapi/parafi-openapi.json#getSolanaValidatorRewards
+  - status: 400
+    title: "Validation error"
+    source_operation: openapi/parafi-openapi.json#getSolanaEpochRewards
+  - status: 500
+    title: "Internal server error"
+    source_operation: openapi/parafi-openapi.json#getSolanaEpochRewards
+  - status: 400
+    title: "Missing startEpoch or endEpoch"
+    source_operation: openapi/parafi-openapi.json#getSolanaMevRewards
+  - status: 500
+    title: "Internal server error"
+    source_operation: openapi/parafi-openapi.json#getSolanaMevRewards
+  - status: 500
+    title: "Failed to fetch compute units"
+    source_operation: openapi/parafi-openapi.json#getSolanaComputeUnits
+  - status: 500
+    title: "Failed to fetch delegators"
+    source_operation: openapi/parafi-openapi.json#getSolanaDelegators
+  - status: 500
+    title: "Failed to fetch Ethereum network stats"
+    source_operation: openapi/parafi-openapi.json#getEthereumNetworkStats

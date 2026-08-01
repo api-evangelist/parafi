@@ -1,27 +1,163 @@
 aid: parafi
 name: Parafi
-description: 'Parafi is a company surfaced as a portfolio company of bain-capital-ventures and added to
-  the API Evangelist network as a stub for enrichment. Sector: fintech. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  ParaFi is a blockchain and digital-asset investment firm (ParaFi Capital) whose technology
+  division, ParaFi Tech (parafi.tech), operates staking validators across Solana, Ethereum,
+  Avalanche, and Aptos and publishes a free, public, read-only REST API for on-chain staking
+  and network data. The ParaFi Tech API (OpenAPI 3.0.3, 23 GET operations, no authentication)
+  serves validator APY/APR and MEV contribution, Solana delegator rewards by staker/validator/epoch,
+  active-stake and delegator breakdowns, real-time and historical network health (TPS, block time,
+  compute units, leader slots), Ethereum and Avalanche network stats, and CoinGecko-backed token
+  prices. It is explicitly designed for dashboards, AI agents, and programmatic integrations,
+  shipping llms.txt, an extended llms-full.txt, and a skill.md agent guide alongside the OpenAPI.
 url: https://raw.githubusercontent.com/api-evangelist/parafi/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - bain-capital-ventures
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://parafi.tech/favicon.ico
 tags:
 - Company
 - Fintech
-apis: []
+- Blockchain
+- Digital Assets
+- Staking
+- Validators
+- Solana
+- Ethereum
+- Avalanche
+- DeFi
+- Market Data
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: parafi:parafi-avalanche-api
+  name: Parafi Avalanche API
+  description: Avalanche validator and network supply endpoints.
+  humanURL: https://parafi.tech/api-docs
+  baseURL: https://parafi.tech/api
+  tags:
+  - Avalanche
+  properties:
+  - type: OpenAPI
+    url: openapi/parafi-avalanche-api-openapi.yml
+  - type: Documentation
+    url: https://parafi.tech/api-docs
+  - type: APIReference
+    url: https://parafi.tech/api-docs
+  - type: GettingStarted
+    url: https://parafi.tech/solana/integration-guide
+- aid: parafi:parafi-ethereum-api
+  name: Parafi Ethereum API
+  description: Ethereum network and sidecar metrics.
+  humanURL: https://parafi.tech/api-docs
+  baseURL: https://parafi.tech/api
+  tags:
+  - Ethereum
+  properties:
+  - type: OpenAPI
+    url: openapi/parafi-ethereum-api-openapi.yml
+  - type: Documentation
+    url: https://parafi.tech/api-docs
+  - type: APIReference
+    url: https://parafi.tech/api-docs
+  - type: GettingStarted
+    url: https://parafi.tech/solana/integration-guide
+- aid: parafi:parafi-market-api
+  name: Parafi Market API
+  description: Token price endpoints for supported assets.
+  humanURL: https://parafi.tech/api-docs
+  baseURL: https://parafi.tech/api
+  tags:
+  - Market
+  properties:
+  - type: OpenAPI
+    url: openapi/parafi-market-api-openapi.yml
+  - type: Documentation
+    url: https://parafi.tech/api-docs
+  - type: APIReference
+    url: https://parafi.tech/api-docs
+  - type: GettingStarted
+    url: https://parafi.tech/solana/integration-guide
+- aid: parafi:parafi-solana-api
+  name: Parafi Solana API
+  description: ParaFi validator, rewards, stake, and Solana network endpoints.
+  humanURL: https://parafi.tech/api-docs
+  baseURL: https://parafi.tech/api
+  tags:
+  - Solana
+  properties:
+  - type: OpenAPI
+    url: openapi/parafi-solana-api-openapi.yml
+  - type: Documentation
+    url: https://parafi.tech/api-docs
+  - type: APIReference
+    url: https://parafi.tech/api-docs
+  - type: GettingStarted
+    url: https://parafi.tech/solana/integration-guide
 common:
+- type: DeveloperPortal
+  url: https://parafi.tech/
+- type: Documentation
+  url: https://parafi.tech/api-docs
+- type: APIReference
+  url: https://parafi.tech/api-docs
+- type: GettingStarted
+  url: https://parafi.tech/solana/integration-guide
+- type: Support
+  url: mailto:info@parafi.tech
+- type: TermsOfService
+  url: https://parafi.tech/terms
+- type: PrivacyPolicy
+  url: https://parafi.tech/privacy
+- type: Authentication
+  url: authentication/parafi-authentication.yml
+- type: Conventions
+  url: conventions/parafi-conventions.yml
+- type: ErrorCatalog
+  url: errors/parafi-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/parafi-lifecycle.yml
+- type: Conformance
+  url: conformance/parafi-conformance.yml
+- type: DataModel
+  url: data-model/parafi-data-model.yml
+- type: MCPServer
+  url: mcp/parafi-mcp.yml
+- type: LLMsTxt
+  url: llms/parafi-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/parafi-agentic-access.yml
+- type: DomainSecurity
+  url: security/parafi-domain-security.yml
 - type: Website
   url: https://parafi.com/
+- type: Blog
+  url: https://parafi.com/library
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: searched
+source: https://parafi.tech/skill.md
+docs: https://parafi.tech/api-docs
+summary:
+  types: [none]
+  api_key_in: []
+  oauth2_flows: []
+  note: >-
+    The ParaFi Tech API is public and read-only. Provider documentation states
+    "No API key required" and the OpenAPI declares no securitySchemes.
+schemes: []

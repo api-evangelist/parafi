@@ -1,0 +1,17 @@
+generated: '2026-07-20'
+method: searched
+source: https://parafi.tech/openapi.json
+versioning:
+  scheme: semver
+  current: '1.1.0'
+  in_spec: true
+  docs: https://parafi.tech/api-docs
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation policy found.
+sla:
+  url: null
+  note: No published SLA found.
+status_page: null
+deprecated_operations: []

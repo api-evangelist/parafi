@@ -1,0 +1,20 @@
+{
+  "provider": "parafi",
+  "sources": [
+    "parafi-avalanche-api-openapi.yml",
+    "parafi-ethereum-api-openapi.yml",
+    "parafi-market-api-openapi.yml",
+    "parafi-solana-api-openapi.yml"
+  ],
+  "outputs": [
+    "parafi-avalanche-api-openapi.yml",
+    "parafi-ethereum-api-openapi.yml",
+    "parafi-market-api-openapi.yml",
+    "parafi-solana-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

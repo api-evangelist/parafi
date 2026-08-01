@@ -1,0 +1,60 @@
+# ParaFi Tech
+
+> Blockchain infrastructure operator. Solana validator (0% commission). Public read-only API for staking data, rewards, validator health, network stats, and token prices.
+
+## Canonical Resources
+
+- [Extended LLM Guide](https://parafi.tech/llms-full.txt): Best starting points, task routing, response conventions
+- [Agent Guide](https://parafi.tech/skill.md): Long-form usage guide with examples and workflow details
+- [OpenAPI Spec](https://parafi.tech/openapi.json): Machine-readable REST API specification
+- [API Docs](https://parafi.tech/api-docs): Human-friendly API explorer
+- [Website](https://parafi.tech): Main product site
+- [Solana Integration Guide](https://parafi.tech/solana/integration-guide): RPC, gRPC, and web3.js examples
+
+## API Base URL
+
+`https://parafi.tech/api`
+
+No authentication required. Public endpoints return JSON.
+
+## Best Starting Points
+
+### Evaluate ParaFi as a Solana validator
+
+- `GET /api/solana/validator-apy`
+- `GET /api/solana/network-apy`
+- `GET /api/solana/validator-active-stake`
+- `GET /api/solana/validator-stake`
+
+### Track staking rewards
+
+- `GET /api/solana/rewards/staker/{address}`
+- `GET /api/solana/rewards/epoch/current`
+- `GET /api/solana/mev-rewards?startEpoch={start}&endEpoch={end}`
+
+### Monitor Solana network health
+
+- `GET /api/solana/sidecar-stats`
+- `GET /api/solana/compute-units`
+- `GET /api/solana/network-stats/history`
+- `GET /api/solana/network-validators`
+
+### Query other supported networks
+
+- `GET /api/ethereum/network-stats`
+- `GET /api/avalanche/validators`
+- `GET /api/market/prices`
+
+## Operating Notes
+
+- Prefer `openapi.json` for machine parsing and `llms-full.txt` for richer text context.
+- Rewards endpoints may return large numeric values as strings to avoid precision loss.
+- Many endpoints include cache metadata such as `cacheSource`, `fromCache`, `isStale`, and `lastUpdated`.
+- Use `current` for the latest epoch on epoch-based rewards routes.
+
+## Validator Identity
+
+- Vote Account: `pt1LsjkNwqCKdYYfc35ToDkqtEG9pswLTJNaMo8inft`
+- Identity: `parafiUS6h6oLhCFwhjvEmQJKw8pF1iXsxMJdTq46dS`
+- Commission: `0%`
+- RPC: `https://solana-rpc.parafi.tech`
