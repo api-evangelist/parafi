@@ -116,6 +116,8 @@ apis:
   - type: GettingStarted
     url: https://parafi.tech/solana/integration-guide
 common:
+- type: Overlay
+  url: overlays/parafi-openapi-overlay.yaml
 - type: DeveloperPortal
   url: https://parafi.tech/
 - type: Documentation
