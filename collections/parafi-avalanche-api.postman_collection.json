@@ -1,0 +1,293 @@
+{
+  "item": [
+    {
+      "id": "ee1856d0-8e36-44ae-820b-80cab558efd3",
+      "name": "Avalanche",
+      "description": {
+        "content": "Avalanche validator and network supply endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f79a8b00-a8d3-4569-bf09-f37658c35703",
+          "name": "Get Avalanche validators (optionally filter by nodeID)",
+          "request": {
+            "name": "Get Avalanche validators (optionally filter by nodeID)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "avalanche",
+                "validators"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nodeID",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "nodeIDs",
+                  "value": "<string>",
+                  "description": "Comma-separated node IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "all",
+                  "value": "<boolean>",
+                  "description": "Return all ParaFi validators"
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f72f6e5-0d34-4608-ab6a-062f6730aed5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "avalanche",
+                    "validators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nodeID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nodeIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalValidators\": 5469,\n  \"aggregatedStats\": {},\n  \"metadata\": {\n    \"fetchedAt\": \"1977-04-02T14:12:13.142Z\",\n    \"source\": \"string\",\n    \"cacheKey\": \"string\"\n  },\n  \"cacheSource\": \"redis\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a266377b-d4b7-4948-b4fc-75fa9d6a0b63",
+              "name": "Failed to fetch validator data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "avalanche",
+                    "validators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nodeID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nodeIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "109dc1a4-c503-4599-a11d-991f07bb30ed",
+          "name": "Get the current AVAX supply used by the staking rewards formula",
+          "request": {
+            "name": "Get the current AVAX supply used by the staking rewards formula",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "avalanche",
+                "supply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b3bd194-b1ee-4349-8dd7-c66717094b74",
+              "name": "Successful response from a P-Chain Avalanche RPC",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "avalanche",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"supplyNanoAvax\": \"9234\",\n  \"source\": \"avalanche-rpc\",\n  \"height\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2a7699b-0151-4f04-bb99-814cd3d54a2c",
+              "name": "The configured and official Avalanche RPCs failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "avalanche",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://parafi.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "07a22ad9-e116-49b2-9240-c6419abf8744",
+    "name": "ParaFi Tech Avalanche API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.\n\nContact Support:\n Name: ParaFi Tech\n Email: info@parafi.tech",
+      "type": "text/plain"
+    }
+  }
+}

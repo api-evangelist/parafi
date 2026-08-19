@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ParaFi Tech Avalanche Ethereum API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ethereum",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ethereum network statistics (gas, validators, staking, supply)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/ethereum/network-stats",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Ethereum network statistics (gas, validators, staking, supply)"
+        },
+        {
+          "info": {
+            "name": "Real-time Ethereum network performance metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/ethereum/sidecar-stats",
+            "params": [
+              {
+                "name": "count",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "smooth",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Real-time Ethereum network performance metrics"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

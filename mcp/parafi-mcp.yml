@@ -2,80 +2,85 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/parafi-openapi.json
-note: >-
-  No official hosted MCP server was found for ParaFi Tech. This is a candidate
-  tool list derived one-to-one from the public OpenAPI operations (all read-only GET).
+note: No official hosted MCP server was found for ParaFi Tech. This is a candidate tool list derived one-to-one
+  from the public OpenAPI operations (all read-only GET).
 server:
   name: parafi-tech
   transport: http
   url: null
 tools:
-  - name: getMarketPrices
-    description: "Get latest prices (CoinGecko-backed)"
-    source_operation: openapi/parafi-openapi.json#getMarketPrices
-  - name: getSolanaValidatorApy
-    description: "Get validator APY/APR with MEV contribution and status"
-    source_operation: openapi/parafi-openapi.json#getSolanaValidatorApy
-  - name: getSolanaNetworkValidators
-    description: "Network-wide validator counts and RPC nodes"
-    source_operation: openapi/parafi-openapi.json#getSolanaNetworkValidators
-  - name: getSolanaSupply
-    description: "Solana supply metrics"
-    source_operation: openapi/parafi-openapi.json#getSolanaSupply
-  - name: getSolanaSimpleRewardsByEpoch
-    description: "Delegator rewards for an epoch (supports 'current')"
-    source_operation: openapi/parafi-openapi.json#getSolanaSimpleRewardsByEpoch
-  - name: getAvalancheValidators
-    description: "Get Avalanche validators (optionally filter by nodeID)"
-    source_operation: openapi/parafi-openapi.json#getAvalancheValidators
-  - name: getAvalancheSupply
-    description: "Get the current AVAX supply used by the staking rewards formula"
-    source_operation: openapi/parafi-openapi.json#getAvalancheSupply
-  - name: getSolanaNetworkApy
-    description: "Network-wide average APY across all validators"
-    source_operation: openapi/parafi-openapi.json#getSolanaNetworkApy
-  - name: getSolanaValidatorActiveStake
-    description: "Validator active stake, commission, vote status"
-    source_operation: openapi/parafi-openapi.json#getSolanaValidatorActiveStake
-  - name: getSolanaValidatorStake
-    description: "Total stake breakdown with delegator counts"
-    source_operation: openapi/parafi-openapi.json#getSolanaValidatorStake
-  - name: getSolanaValidatorDelegators
-    description: "List all delegators with stake amounts"
-    source_operation: openapi/parafi-openapi.json#getSolanaValidatorDelegators
-  - name: getSolanaStakerRewards
-    description: "Reward history for a specific staker address"
-    source_operation: openapi/parafi-openapi.json#getSolanaStakerRewards
-  - name: getSolanaValidatorRewards
-    description: "Reward distribution for all delegators of a validator"
-    source_operation: openapi/parafi-openapi.json#getSolanaValidatorRewards
-  - name: getSolanaEpochRewards
-    description: "All delegator rewards for a specific epoch"
-    source_operation: openapi/parafi-openapi.json#getSolanaEpochRewards
-  - name: getSolanaMevRewards
-    description: "MEV rewards from Jito for a range of epochs"
-    source_operation: openapi/parafi-openapi.json#getSolanaMevRewards
-  - name: getSolanaComputeUnits
-    description: "Current block compute units utilization"
-    source_operation: openapi/parafi-openapi.json#getSolanaComputeUnits
-  - name: getSolanaComputeUnitsHistory
-    description: "Historical compute units utilization time series"
-    source_operation: openapi/parafi-openapi.json#getSolanaComputeUnitsHistory
-  - name: getSolanaLeaderSlots
-    description: "Leader slot statistics (blocks produced, missed, skip rate)"
-    source_operation: openapi/parafi-openapi.json#getSolanaLeaderSlots
-  - name: getSolanaSidecarStats
-    description: "Real-time network performance (TPS, block time, compute units)"
-    source_operation: openapi/parafi-openapi.json#getSolanaSidecarStats
-  - name: getSolanaNetworkStatsHistory
-    description: "Historical network performance (TPS, block time, compute utilization)"
-    source_operation: openapi/parafi-openapi.json#getSolanaNetworkStatsHistory
-  - name: getSolanaDelegators
-    description: "All delegators with stake amounts and account details"
-    source_operation: openapi/parafi-openapi.json#getSolanaDelegators
-  - name: getEthereumNetworkStats
-    description: "Ethereum network statistics (gas, validators, staking, supply)"
-    source_operation: openapi/parafi-openapi.json#getEthereumNetworkStats
-  - name: getEthereumSidecarStats
-    description: "Real-time Ethereum network performance metrics"
-    source_operation: openapi/parafi-openapi.json#getEthereumSidecarStats
+- name: getMarketPrices
+  description: Get latest prices (CoinGecko-backed)
+  source_operation: openapi/parafi-openapi.json#getMarketPrices
+- name: getSolanaValidatorApy
+  description: Get validator APY/APR with MEV contribution and status
+  source_operation: openapi/parafi-openapi.json#getSolanaValidatorApy
+- name: getSolanaNetworkValidators
+  description: Network-wide validator counts and RPC nodes
+  source_operation: openapi/parafi-openapi.json#getSolanaNetworkValidators
+- name: getSolanaSupply
+  description: Solana supply metrics
+  source_operation: openapi/parafi-openapi.json#getSolanaSupply
+- name: getSolanaSimpleRewardsByEpoch
+  description: Delegator rewards for an epoch (supports 'current')
+  source_operation: openapi/parafi-openapi.json#getSolanaSimpleRewardsByEpoch
+- name: getAvalancheValidators
+  description: Get Avalanche validators (optionally filter by nodeID)
+  source_operation: openapi/parafi-openapi.json#getAvalancheValidators
+- name: getAvalancheSupply
+  description: Get the current AVAX supply used by the staking rewards formula
+  source_operation: openapi/parafi-openapi.json#getAvalancheSupply
+- name: getSolanaNetworkApy
+  description: Network-wide average APY across all validators
+  source_operation: openapi/parafi-openapi.json#getSolanaNetworkApy
+- name: getSolanaValidatorActiveStake
+  description: Validator active stake, commission, vote status
+  source_operation: openapi/parafi-openapi.json#getSolanaValidatorActiveStake
+- name: getSolanaValidatorStake
+  description: Total stake breakdown with delegator counts
+  source_operation: openapi/parafi-openapi.json#getSolanaValidatorStake
+- name: getSolanaValidatorDelegators
+  description: List all delegators with stake amounts
+  source_operation: openapi/parafi-openapi.json#getSolanaValidatorDelegators
+- name: getSolanaStakerRewards
+  description: Reward history for a specific staker address
+  source_operation: openapi/parafi-openapi.json#getSolanaStakerRewards
+- name: getSolanaValidatorRewards
+  description: Reward distribution for all delegators of a validator
+  source_operation: openapi/parafi-openapi.json#getSolanaValidatorRewards
+- name: getSolanaEpochRewards
+  description: All delegator rewards for a specific epoch
+  source_operation: openapi/parafi-openapi.json#getSolanaEpochRewards
+- name: getSolanaMevRewards
+  description: MEV rewards from Jito for a range of epochs
+  source_operation: openapi/parafi-openapi.json#getSolanaMevRewards
+- name: getSolanaComputeUnits
+  description: Current block compute units utilization
+  source_operation: openapi/parafi-openapi.json#getSolanaComputeUnits
+- name: getSolanaComputeUnitsHistory
+  description: Historical compute units utilization time series
+  source_operation: openapi/parafi-openapi.json#getSolanaComputeUnitsHistory
+- name: getSolanaLeaderSlots
+  description: Leader slot statistics (blocks produced, missed, skip rate)
+  source_operation: openapi/parafi-openapi.json#getSolanaLeaderSlots
+- name: getSolanaSidecarStats
+  description: Real-time network performance (TPS, block time, compute units)
+  source_operation: openapi/parafi-openapi.json#getSolanaSidecarStats
+- name: getSolanaNetworkStatsHistory
+  description: Historical network performance (TPS, block time, compute utilization)
+  source_operation: openapi/parafi-openapi.json#getSolanaNetworkStatsHistory
+- name: getSolanaDelegators
+  description: All delegators with stake amounts and account details
+  source_operation: openapi/parafi-openapi.json#getSolanaDelegators
+- name: getEthereumNetworkStats
+  description: Ethereum network statistics (gas, validators, staking, supply)
+  source_operation: openapi/parafi-openapi.json#getEthereumNetworkStats
+- name: getEthereumSidecarStats
+  description: Real-time Ethereum network performance metrics
+  source_operation: openapi/parafi-openapi.json#getEthereumSidecarStats
+deployment:
+  mode: none
+  verified: derived
+  tools: 23
+  checked: '2026-08-12'
+  source: catalog MCP census

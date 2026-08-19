@@ -1,0 +1,103 @@
+{
+  "item": [
+    {
+      "id": "9e1612cc-9a3c-46fe-b299-1dd05e65d54b",
+      "name": "Market",
+      "description": {
+        "content": "Token price endpoints for supported assets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62fb9e23-bf51-4a27-9860-ce25d36b4610",
+          "name": "Get latest prices (CoinGecko-backed)",
+          "request": {
+            "name": "Get latest prices (CoinGecko-backed)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "market",
+                "prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "445cbc44-28ba-410a-907d-5e38f536a91e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "market",
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"bitcoin\": {\n      \"usd\": 65000\n    },\n    \"ethereum\": {\n      \"usd\": 3200\n    },\n    \"solana\": {\n      \"usd\": 150\n    },\n    \"aptos\": {\n      \"usd\": 9\n    }\n  },\n  \"lastUpdated\": 1710000000000,\n  \"fromCache\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://parafi.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e97110a2-af9c-4c9c-bac2-c9f9e7b212ad",
+    "name": "ParaFi Tech Avalanche Market API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.\n\nContact Support:\n Name: ParaFi Tech\n Email: info@parafi.tech",
+      "type": "text/plain"
+    }
+  }
+}

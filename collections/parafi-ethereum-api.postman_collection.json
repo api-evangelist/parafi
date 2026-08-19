@@ -1,0 +1,241 @@
+{
+  "item": [
+    {
+      "id": "377dd116-f3f8-45a8-89f5-2fcc5dd38050",
+      "name": "Ethereum",
+      "description": {
+        "content": "Ethereum network and sidecar metrics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "edc973ee-43eb-42d3-9fb9-03498eed39d2",
+          "name": "Ethereum network statistics (gas, validators, staking, supply)",
+          "request": {
+            "name": "Ethereum network statistics (gas, validators, staking, supply)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "ethereum",
+                "network-stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58e4d55f-944b-4caa-a6f7-deea769d53d5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ethereum",
+                    "network-stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"latestBlock\": 19500000,\n    \"gasPrice\": {\n      \"low\": 15,\n      \"medium\": 20,\n      \"high\": 30\n    },\n    \"baseFee\": 12.5,\n    \"blockTime\": 12.1,\n    \"activeValidators\": 950000,\n    \"totalStakedETH\": 32000000,\n    \"averageStakedPerValidator\": 33.7,\n    \"currentEpoch\": 290000,\n    \"totalETHSupply\": 120000000\n  },\n  \"lastUpdated\": 1710000000000,\n  \"fromCache\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bafcfd94-25a2-4ad1-bddc-b001043d7448",
+              "name": "Failed to fetch Ethereum network stats",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ethereum",
+                    "network-stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "572e3414-eb52-4eef-bb3a-29f42aac6f45",
+          "name": "Real-time Ethereum network performance metrics",
+          "request": {
+            "name": "Real-time Ethereum network performance metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "ethereum",
+                "sidecar-stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "smooth",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "691a1e60-e71f-4ac6-9fd5-a4cc2da7f299",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "ethereum",
+                    "sidecar-stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "smooth",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"latest\": {},\n  \"cacheSource\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://parafi.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f11ba602-43b5-4b02-8ace-c694f4b06d0f",
+    "name": "ParaFi Tech Avalanche Ethereum API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.\n\nContact Support:\n Name: ParaFi Tech\n Email: info@parafi.tech",
+      "type": "text/plain"
+    }
+  }
+}

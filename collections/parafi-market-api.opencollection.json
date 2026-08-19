@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ParaFi Tech Avalanche Market API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Market",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get latest prices (CoinGecko-backed)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/market/prices"
+          },
+          "docs": "Get latest prices (CoinGecko-backed)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

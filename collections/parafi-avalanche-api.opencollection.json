@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ParaFi Tech Avalanche API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Avalanche",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Avalanche validators (optionally filter by nodeID)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/avalanche/validators",
+            "params": [
+              {
+                "name": "nodeID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nodeIDs",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated node IDs"
+              },
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "Return all ParaFi validators"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Avalanche validators (optionally filter by nodeID)"
+        },
+        {
+          "info": {
+            "name": "Get the current AVAX supply used by the staking rewards formula",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/avalanche/supply"
+          },
+          "docs": "Get the current AVAX supply used by the staking rewards formula"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

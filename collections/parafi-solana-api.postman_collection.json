@@ -1,0 +1,2860 @@
+{
+  "item": [
+    {
+      "id": "9b9d00d3-1a7e-416c-b22d-8e0a745629b1",
+      "name": "Solana",
+      "description": {
+        "content": "ParaFi validator, rewards, stake, and Solana network endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d11fb0d9-105a-480b-b9d8-0f739dd6189b",
+          "name": "Get validator APY/APR with MEV contribution and status",
+          "request": {
+            "name": "Get validator APY/APR with MEV contribution and status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "validator-apy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "epoch",
+                  "value": "<integer>",
+                  "description": "Override epoch for calculation (default: current)"
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false",
+                  "description": "Bypass cache if true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dc8c5fb-dfa4-4e1a-bc1e-f08bc784817a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-apy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "epoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apy\": 9874.91300868353,\n  \"apr\": 3347.3243991649424,\n  \"epoch\": 6226,\n  \"hasMevData\": true,\n  \"inflationRewards\": 5432.934680199788,\n  \"mevRewards\": 4960.919020044533,\n  \"totalRewards\": 2109.6713721262017,\n  \"lastUpdated\": \"2007-05-07T11:27:39.563Z\",\n  \"dataSource\": \"calculated\",\n  \"cacheSource\": \"fresh\",\n  \"mevDataAge\": \"fallback\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11ff6399-21b3-4053-a194-caad706d986c",
+              "name": "Failed to fetch APY data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-apy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "epoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fba8f302-b323-4c9b-9d5a-9ba098de5a6e",
+          "name": "Network-wide validator counts and RPC nodes",
+          "request": {
+            "name": "Network-wide validator counts and RPC nodes",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "network-validators"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false",
+                  "description": "Bypass cache if true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b347c394-6bf0-4606-a8dd-f52b18d6af29",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "network-validators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activeValidators\": 5281,\n  \"totalValidators\": 9254,\n  \"delinquentValidators\": 6519,\n  \"activePercentage\": 7253.5598447245,\n  \"rpcNodes\": 2061,\n  \"totalNodes\": 2117,\n  \"lastUpdated\": \"1948-05-21T21:18:37.972Z\",\n  \"cacheSource\": \"fresh\",\n  \"isStale\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "201adb22-2188-4bf5-a7c0-0380bcd71008",
+              "name": "Failed to fetch validator data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "network-validators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25918836-63e5-4194-8bc8-bf511065eb51",
+          "name": "Solana supply metrics",
+          "request": {
+            "name": "Solana supply metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "supply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false",
+                  "description": "Bypass cache if true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cae99a32-fad5-4c1f-866f-028bf688ce1a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"circulating\": 5009,\n  \"nonCirculating\": 5157,\n  \"total\": 8976,\n  \"circulatingSOL\": 612.1457297553012,\n  \"nonCirculatingSOL\": 8021.050219809612,\n  \"totalSOL\": 1429.7645072488308,\n  \"lastUpdated\": \"2005-12-04T15:34:30.205Z\",\n  \"cacheSource\": \"redis\",\n  \"isStale\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c07222c-b0bb-4f9d-a32e-ab79aa23fc6b",
+              "name": "Failed to fetch supply data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edbec48c-36dd-4f88-822c-e220b08be57c",
+          "name": "Delegator rewards for an epoch (supports 'current')",
+          "request": {
+            "name": "Delegator rewards for an epoch (supports 'current')",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "simple-rewards",
+                "epoch",
+                ":epochNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "rewards"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "minReward",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxReward",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "validatorVoteAccount",
+                  "value": "<string>",
+                  "description": "Solana vote account public key"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeInactive",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "epochNumber",
+                  "description": "(Required) Epoch number or 'current'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a982b9a0-ea0c-4675-af1e-66b25826d708",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "simple-rewards",
+                    "epoch",
+                    ":epochNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "rewards"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "minReward",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maxReward",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "validatorVoteAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "epochNumber",
+                      "description": "(Required) Epoch number or 'current'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"epochInfo\": {\n    \"epoch\": 9850,\n    \"totalParticipants\": 9305,\n    \"totalRewardsDistributed\": \"string\",\n    \"totalStakeActive\": \"string\",\n    \"averageRewardPerParticipant\": \"string\",\n    \"uniqueValidators\": 2951,\n    \"uniqueStakers\": 276,\n    \"rewardConsistency\": 8257\n  },\n  \"rewardsData\": {\n    \"data\": [\n      {\n        \"stakeAccount\": \"string\",\n        \"stakerAuthority\": \"string\",\n        \"validatorVoteAccount\": \"string\",\n        \"totalRewardsActual\": \"string\",\n        \"inflationRewards\": \"string\",\n        \"mevRewards\": \"string\",\n        \"mevAvailabilityStatus\": \"available\",\n        \"dataCompleteness\": \"string\",\n        \"dataStatus\": {\n          \"balanceDataComplete\": false,\n          \"inflationDataComplete\": false,\n          \"mevDataComplete\": false\n        },\n        \"validation\": {\n          \"balanceMatchesRPC\": false,\n          \"calculationAccuracy\": \"string\",\n          \"confidenceScore\": 1030,\n          \"dataFreshnessScore\": 3532\n        },\n        \"activeStake\": \"string\",\n        \"delegatedStake\": \"string\",\n        \"activationEpoch\": 8636,\n        \"deactivationEpoch\": 8251,\n        \"calculationMethod\": \"balance_difference\"\n      },\n      {\n        \"stakeAccount\": \"string\",\n        \"stakerAuthority\": \"string\",\n        \"validatorVoteAccount\": \"string\",\n        \"totalRewardsActual\": \"string\",\n        \"inflationRewards\": \"string\",\n        \"mevRewards\": \"string\",\n        \"mevAvailabilityStatus\": \"available\",\n        \"dataCompleteness\": \"string\",\n        \"dataStatus\": {\n          \"balanceDataComplete\": false,\n          \"inflationDataComplete\": true,\n          \"mevDataComplete\": true\n        },\n        \"validation\": {\n          \"balanceMatchesRPC\": true,\n          \"calculationAccuracy\": \"string\",\n          \"confidenceScore\": 7522,\n          \"dataFreshnessScore\": 2296\n        },\n        \"activeStake\": \"string\",\n        \"delegatedStake\": \"string\",\n        \"activationEpoch\": 7570,\n        \"deactivationEpoch\": 1406,\n        \"calculationMethod\": \"balance_difference\"\n      }\n    ],\n    \"pagination\": {\n      \"page\": 7301,\n      \"limit\": 4789,\n      \"totalPages\": 7034,\n      \"totalCount\": 5978,\n      \"hasNext\": false,\n      \"hasPrev\": true\n    }\n  },\n  \"statistics\": {\n    \"totalRewards\": \"string\",\n    \"totalStake\": \"string\",\n    \"averageReward\": \"string\",\n    \"medianReward\": \"string\",\n    \"rewardDistribution\": [\n      431.0456055396816,\n      3188.1656319448825\n    ]\n  },\n  \"dataQuality\": {\n    \"totalSnapshots\": 2037,\n    \"completeData\": 2957,\n    \"preliminaryData\": 6734,\n    \"dataCompletenessPercentage\": 5016,\n    \"mevDataTiming\": {\n      \"percentageWithMev\": 9548,\n      \"recordsWithMev\": 5126,\n      \"pendingMevRecords\": 6935,\n      \"estimatedNextMevUpdate\": \"1969-10-27T03:54:57.256Z\"\n    },\n    \"validationAccuracy\": 1906\n  },\n  \"summary\": {\n    \"calculationMethod\": \"balance_difference\",\n    \"cacheSource\": \"redis\",\n    \"lastUpdated\": \"2002-08-01T15:19:06.486Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe0452ab-3872-4fc2-abbe-d00edde66b54",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "simple-rewards",
+                    "epoch",
+                    ":epochNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "rewards"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "minReward",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maxReward",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "validatorVoteAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "epochNumber",
+                      "description": "(Required) Epoch number or 'current'"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64b70a0a-ed6a-4b60-84ae-59f5ea7d64bc",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "simple-rewards",
+                    "epoch",
+                    ":epochNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "rewards"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "minReward",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maxReward",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "validatorVoteAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "epochNumber",
+                      "description": "(Required) Epoch number or 'current'"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "844dc8ab-5afb-4f3d-bd4e-da260f65b14e",
+          "name": "Network-wide average APY across all validators",
+          "request": {
+            "name": "Network-wide average APY across all validators",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "network-apy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80d3c264-7035-49d1-bb18-09e57972af74",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "network-apy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apy\": 7.45,\n  \"inflationAPY\": 6.8,\n  \"mevAPY\": 0.65,\n  \"averageCommission\": 7.2,\n  \"stakingRatio\": 65.4,\n  \"lastUpdated\": \"2025-01-28T12:00:00.000Z\",\n  \"cacheSource\": \"redis\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a83c4c9-37ce-4a09-b8ef-44c5ff9d9e76",
+              "name": "Failed to fetch network APY",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "network-apy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80596018-5da3-4139-92bc-190cf18cb2d1",
+          "name": "Validator active stake, commission, vote status",
+          "request": {
+            "name": "Validator active stake, commission, vote status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "validator-active-stake"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66018dc1-24e3-49a9-9a07-6edc8e33a2b3",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-active-stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activeStake\": 5200000000000,\n  \"activeStakeInSol\": 5200,\n  \"commission\": 0,\n  \"lastVote\": 312000000,\n  \"epochVoteAccount\": true,\n  \"delinquent\": false,\n  \"lastUpdated\": \"2025-01-28T12:00:00.000Z\",\n  \"cacheSource\": \"redis\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cf95ed4-e4be-470b-9c38-a8d5157ebd0a",
+              "name": "Failed to fetch active stake",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-active-stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f93057f-94eb-47e7-90b3-3ded7b1acb85",
+          "name": "Total stake breakdown with delegator counts",
+          "request": {
+            "name": "Total stake breakdown with delegator counts",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "validator-stake"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95ced981-2988-4c82-a902-49f502448b00",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalStake\": 5500000000000,\n  \"totalStakeInSol\": 5500,\n  \"totalStakeAccounts\": 150,\n  \"activeStakeAccounts\": 145,\n  \"delegatorCount\": 120,\n  \"activeStake\": 5200000000000,\n  \"inactiveStake\": 300000000000,\n  \"lastUpdated\": \"2025-01-28T12:00:00.000Z\",\n  \"cacheSource\": \"redis\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e2dcf68-9e54-4420-b273-61a00aca48f3",
+              "name": "Failed to fetch stake data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-stake"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc1a6233-a86b-4562-b115-bd67502b9fee",
+          "name": "List all delegators with stake amounts",
+          "request": {
+            "name": "List all delegators with stake amounts",
+            "description": {
+              "content": "Returns the current stake-account level delegator list for the ParaFi validator, along with aggregate totals such as active stake accounts and delegator count.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "validator-delegators"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d08d3653-2bf1-44e9-a8ee-d16928168c54",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-delegators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"delegators\": [\n    {\n      \"stakeAccount\": \"ExampleStakeAccount111111111111111111111111111\",\n      \"stakerAuthority\": \"ExampleStaker1111111111111111111111111111111111\",\n      \"activeStake\": \"125000000000\"\n    }\n  ],\n  \"totalStake\": 5500000000000,\n  \"totalStakeInSol\": 5500,\n  \"totalStakeAccounts\": 150,\n  \"activeStakeAccounts\": 145,\n  \"delegatorCount\": 120,\n  \"lastUpdated\": \"2025-01-28T12:00:00.000Z\",\n  \"cacheSource\": \"redis\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "622ed012-6818-4c18-b9bf-bb7eb0186e32",
+              "name": "Failed to fetch delegator data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "validator-delegators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e12d80b-7d6e-4268-8992-939d7cb9cd54",
+          "name": "Reward history for a specific staker address",
+          "request": {
+            "name": "Reward history for a specific staker address",
+            "description": {
+              "content": "Use this route to retrieve reward history and summary information for a wallet or staker authority across epochs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "rewards",
+                "staker",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "startEpoch",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endEpoch",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "stakeAccount",
+                  "value": "<string>",
+                  "description": "Filter by specific stake account"
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "address",
+                  "description": "(Required) Staker wallet address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1b364dc-4c4a-497c-982d-c961641ffd4d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "staker",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stakeAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Staker wallet address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stakerProfile\": {\n    \"address\": \"ExampleStaker1111111111111111111111111111111111\"\n  },\n  \"rewards\": [\n    {\n      \"epoch\": 750,\n      \"stakeAccount\": \"ExampleStakeAccount111111111111111111111111111\",\n      \"totalRewardsActual\": \"123456789\"\n    }\n  ],\n  \"summary\": {\n    \"totalRewards\": \"123456789\",\n    \"epochsTracked\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a1453ce-0904-4aca-84d6-7d75492e38f0",
+              "name": "Invalid address",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "staker",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stakeAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Staker wallet address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5680011-c788-4e5a-b468-06ab8dd9ff9e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "staker",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "stakeAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "address",
+                      "description": "(Required) Staker wallet address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a039de59-59a7-4c73-9b92-89605cbadc86",
+          "name": "Reward distribution for all delegators of a validator",
+          "request": {
+            "name": "Reward distribution for all delegators of a validator",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "rewards",
+                "validator",
+                ":voteAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "startEpoch",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endEpoch",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "voteAccount",
+                  "description": "(Required) Validator vote account address"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4439ce1-27ae-42e6-9263-5b9b9bfc58ff",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "validator",
+                    ":voteAccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "voteAccount",
+                      "description": "(Required) Validator vote account address"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"validatorInfo\": {},\n  \"performanceMetrics\": {},\n  \"summary\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bd35eee-cc26-446f-b5c4-b316ce3e1001",
+              "name": "Invalid vote account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "validator",
+                    ":voteAccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "voteAccount",
+                      "description": "(Required) Validator vote account address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bfe5b275-ad29-42ee-b8a9-f5de7f2ea941",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "validator",
+                    ":voteAccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "voteAccount",
+                      "description": "(Required) Validator vote account address"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9e82010-eb00-40ff-9ad3-b3a6a48d4cbc",
+          "name": "All delegator rewards for a specific epoch",
+          "request": {
+            "name": "All delegator rewards for a specific epoch",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "rewards",
+                "epoch",
+                ":epochNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "rewards"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "desc"
+                },
+                {
+                  "disabled": false,
+                  "key": "validatorVoteAccount",
+                  "value": "<string>",
+                  "description": "Filter by validator"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeInactive",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "epochNumber",
+                  "description": "(Required) Epoch number or 'current'"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a696fe5d-c8aa-4f05-aac6-a5c4e0177112",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "epoch",
+                    ":epochNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "rewards"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "validatorVoteAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "epochNumber",
+                      "description": "(Required) Epoch number or 'current'"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"epochInfo\": {\n    \"epoch\": 70,\n    \"totalParticipants\": 7841,\n    \"totalRewardsDistributed\": \"string\",\n    \"totalStakeActive\": \"string\",\n    \"averageRewardPerParticipant\": \"string\",\n    \"uniqueValidators\": 1558,\n    \"uniqueStakers\": 7810,\n    \"rewardConsistency\": 982\n  },\n  \"rewardsData\": {\n    \"data\": [\n      {\n        \"stakeAccount\": \"string\",\n        \"stakerAuthority\": \"string\",\n        \"validatorVoteAccount\": \"string\",\n        \"totalRewardsActual\": \"string\",\n        \"inflationRewards\": \"string\",\n        \"mevRewards\": \"string\",\n        \"mevAvailabilityStatus\": \"available\",\n        \"dataCompleteness\": \"string\",\n        \"dataStatus\": {\n          \"balanceDataComplete\": true,\n          \"inflationDataComplete\": true,\n          \"mevDataComplete\": true\n        },\n        \"validation\": {\n          \"balanceMatchesRPC\": true,\n          \"calculationAccuracy\": \"string\",\n          \"confidenceScore\": 5648,\n          \"dataFreshnessScore\": 6340\n        },\n        \"activeStake\": \"string\",\n        \"delegatedStake\": \"string\",\n        \"activationEpoch\": 9113,\n        \"deactivationEpoch\": 8680,\n        \"calculationMethod\": \"balance_difference\"\n      },\n      {\n        \"stakeAccount\": \"string\",\n        \"stakerAuthority\": \"string\",\n        \"validatorVoteAccount\": \"string\",\n        \"totalRewardsActual\": \"string\",\n        \"inflationRewards\": \"string\",\n        \"mevRewards\": \"string\",\n        \"mevAvailabilityStatus\": \"pending\",\n        \"dataCompleteness\": \"string\",\n        \"dataStatus\": {\n          \"balanceDataComplete\": false,\n          \"inflationDataComplete\": true,\n          \"mevDataComplete\": true\n        },\n        \"validation\": {\n          \"balanceMatchesRPC\": true,\n          \"calculationAccuracy\": \"string\",\n          \"confidenceScore\": 3039,\n          \"dataFreshnessScore\": 7199\n        },\n        \"activeStake\": \"string\",\n        \"delegatedStake\": \"string\",\n        \"activationEpoch\": 8085,\n        \"deactivationEpoch\": 5280,\n        \"calculationMethod\": \"balance_difference\"\n      }\n    ],\n    \"pagination\": {\n      \"page\": 8150,\n      \"limit\": 4566,\n      \"totalPages\": 5176,\n      \"totalCount\": 8540,\n      \"hasNext\": false,\n      \"hasPrev\": false\n    }\n  },\n  \"statistics\": {\n    \"totalRewards\": \"string\",\n    \"totalStake\": \"string\",\n    \"averageReward\": \"string\",\n    \"medianReward\": \"string\",\n    \"rewardDistribution\": [\n      212.274864408456,\n      7821.850051851337\n    ]\n  },\n  \"dataQuality\": {\n    \"totalSnapshots\": 2916,\n    \"completeData\": 8412,\n    \"preliminaryData\": 1613,\n    \"dataCompletenessPercentage\": 5270,\n    \"mevDataTiming\": {\n      \"percentageWithMev\": 4836,\n      \"recordsWithMev\": 8044,\n      \"pendingMevRecords\": 2074,\n      \"estimatedNextMevUpdate\": \"1951-12-05T22:50:34.165Z\"\n    },\n    \"validationAccuracy\": 5762\n  },\n  \"summary\": {\n    \"calculationMethod\": \"balance_difference\",\n    \"cacheSource\": \"fresh\",\n    \"lastUpdated\": \"1966-08-24T15:31:58.504Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07d852a3-68db-45a0-9d62-c629a419a15a",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "epoch",
+                    ":epochNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "rewards"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "validatorVoteAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "epochNumber",
+                      "description": "(Required) Epoch number or 'current'"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a686fb10-004e-49e6-8cc4-feee514f4781",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "rewards",
+                    "epoch",
+                    ":epochNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "rewards"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "validatorVoteAccount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "epochNumber",
+                      "description": "(Required) Epoch number or 'current'"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "648ce738-6243-497e-ac1d-32742236cf14",
+          "name": "MEV rewards from Jito for a range of epochs",
+          "request": {
+            "name": "MEV rewards from Jito for a range of epochs",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "mev-rewards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startEpoch",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "endEpoch",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c58a63c1-3943-4706-a4a9-4c7bed1392e2",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "mev-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rewards\": {},\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b69dca5f-31da-42b7-8773-a4bf96ce6b3a",
+              "name": "Missing startEpoch or endEpoch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "mev-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a265376b-8f95-444f-bdd0-f24eb3e328a5",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "mev-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startEpoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "endEpoch",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc3faa1a-46bb-4126-9ff2-17ad7ee96886",
+          "name": "Current block compute units utilization",
+          "request": {
+            "name": "Current block compute units utilization",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "compute-units"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "slot",
+                  "value": "<integer>",
+                  "description": "Specific slot (default: latest)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d32eb1e7-55db-4d21-a44e-8ff91328bd8d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "compute-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "slot",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"slot\": 312000000,\n  \"computeUnitsConsumed\": 35000000,\n  \"computeUnitsTotal\": 48000000,\n  \"utilizationPercentage\": 72.9,\n  \"timestamp\": \"2025-01-28T12:00:00.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82449468-e818-4fc4-9455-f50a7f65e7f7",
+              "name": "Failed to fetch compute units",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "compute-units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "slot",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8048a157-e4dc-42c4-b3fe-6e3c8f124700",
+          "name": "Historical compute units utilization time series",
+          "request": {
+            "name": "Historical compute units utilization time series",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "compute-units",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<integer>",
+                  "description": "Rollup interval in minutes"
+                },
+                {
+                  "disabled": false,
+                  "key": "window",
+                  "value": "<integer>",
+                  "description": "Number of data points"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9140cec4-7e0a-48f5-be97-e114371368fd",
+              "name": "Array of [timestamp, utilization] tuples",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "compute-units",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "window",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    3314.5529070960247,\n    9466.589022351063\n  ],\n  [\n    4408.047505124574,\n    625.0126651052713\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4db5705e-cc61-4d21-b39a-70f940a3cd66",
+          "name": "Leader slot statistics (blocks produced, missed, skip rate)",
+          "request": {
+            "name": "Leader slot statistics (blocks produced, missed, skip rate)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "leader-slots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "epoch",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f5662b1-c6b0-4ec5-a126-9881ea2d1511",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "leader-slots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "epoch",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalLeaderSlots\": 48,\n  \"blocksProduced\": 47,\n  \"blocksMissed\": 1,\n  \"skipRate\": 2.08,\n  \"epoch\": 750,\n  \"lastUpdated\": \"2025-01-28T12:00:00.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f63e9e34-88c1-4a7a-a7ff-e2ce6a7c3d0d",
+          "name": "Real-time network performance (TPS, block time, compute units)",
+          "request": {
+            "name": "Real-time network performance (TPS, block time, compute units)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "sidecar-stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Number of data points"
+                },
+                {
+                  "disabled": false,
+                  "key": "smooth",
+                  "value": "<integer>",
+                  "description": "Smoothing window"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60a3c1f2-0d6f-4f8a-bc97-d05716a340ac",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "sidecar-stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "smooth",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"latest\": {},\n  \"cacheSource\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "592464a1-efc6-47c1-8d64-f00e3fe3234a",
+          "name": "Historical network performance (TPS, block time, compute utilization)",
+          "request": {
+            "name": "Historical network performance (TPS, block time, compute utilization)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "network-stats",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "granularity",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "hours",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "94aa40c3-4e2f-494b-8cde-1f812345416f",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "network-stats",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "granularity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "days",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "hours",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"granularity\": \"string\",\n  \"startDate\": \"string\",\n  \"endDate\": \"string\",\n  \"count\": 1188\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4844c220-9384-42e7-bfc0-6fbeea439ccc",
+          "name": "All delegators with stake amounts and account details",
+          "request": {
+            "name": "All delegators with stake amounts and account details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "solana",
+                "delegators"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09d0cb5e-431f-4510-90bd-564716e86591",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "delegators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"delegators\": [],\n  \"totalStake\": 3381,\n  \"delegatorCount\": 6599,\n  \"lastUpdated\": \"1965-08-29T11:02:55.631Z\",\n  \"totalStakeInSol\": 6872.439102985877,\n  \"totalStakeAccounts\": 7772,\n  \"activeStakeAccounts\": 3893,\n  \"cacheSource\": \"redis\",\n  \"isStale\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "646e586c-329c-4b97-b930-2e1e2c32f9cc",
+              "name": "Failed to fetch delegators",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "solana",
+                    "delegators"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://parafi.tech",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3b630169-0cc9-40a0-bdda-e3cb690bdb47",
+    "name": "ParaFi Tech Avalanche Solana API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.\n\nContact Support:\n Name: ParaFi Tech\n Email: info@parafi.tech",
+      "type": "text/plain"
+    }
+  }
+}

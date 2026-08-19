@@ -1,0 +1,538 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ParaFi Tech Avalanche Solana API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Solana",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get validator APY/APR with MEV contribution and status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/validator-apy",
+            "params": [
+              {
+                "name": "epoch",
+                "value": "",
+                "type": "query",
+                "description": "Override epoch for calculation (default: current)"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Bypass cache if true"
+              }
+            ]
+          },
+          "docs": "Get validator APY/APR with MEV contribution and status"
+        },
+        {
+          "info": {
+            "name": "Network-wide validator counts and RPC nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/network-validators",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Bypass cache if true"
+              }
+            ]
+          },
+          "docs": "Network-wide validator counts and RPC nodes"
+        },
+        {
+          "info": {
+            "name": "Solana supply metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/supply",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Bypass cache if true"
+              }
+            ]
+          },
+          "docs": "Solana supply metrics"
+        },
+        {
+          "info": {
+            "name": "Delegator rewards for an epoch (supports 'current')",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/simple-rewards/epoch/:epochNumber",
+            "params": [
+              {
+                "name": "epochNumber",
+                "value": "",
+                "type": "path",
+                "description": "Epoch number or 'current'"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "minReward",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxReward",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "validatorVoteAccount",
+                "value": "",
+                "type": "query",
+                "description": "Solana vote account public key"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delegator rewards for an epoch (supports 'current')"
+        },
+        {
+          "info": {
+            "name": "Network-wide average APY across all validators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/network-apy",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Network-wide average APY across all validators"
+        },
+        {
+          "info": {
+            "name": "Validator active stake, commission, vote status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/validator-active-stake",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Validator active stake, commission, vote status"
+        },
+        {
+          "info": {
+            "name": "Total stake breakdown with delegator counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/validator-stake",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Total stake breakdown with delegator counts"
+        },
+        {
+          "info": {
+            "name": "List all delegators with stake amounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/validator-delegators",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current stake-account level delegator list for the ParaFi validator, along with aggregate totals such as active stake accounts and delegator count."
+        },
+        {
+          "info": {
+            "name": "Reward history for a specific staker address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/rewards/staker/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Staker wallet address"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startEpoch",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endEpoch",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stakeAccount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific stake account"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Use this route to retrieve reward history and summary information for a wallet or staker authority across epochs."
+        },
+        {
+          "info": {
+            "name": "Reward distribution for all delegators of a validator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/rewards/validator/:voteAccount",
+            "params": [
+              {
+                "name": "voteAccount",
+                "value": "",
+                "type": "path",
+                "description": "Validator vote account address"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startEpoch",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endEpoch",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Reward distribution for all delegators of a validator"
+        },
+        {
+          "info": {
+            "name": "All delegator rewards for a specific epoch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/rewards/epoch/:epochNumber",
+            "params": [
+              {
+                "name": "epochNumber",
+                "value": "",
+                "type": "path",
+                "description": "Epoch number or 'current'"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "validatorVoteAccount",
+                "value": "",
+                "type": "query",
+                "description": "Filter by validator"
+              },
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "All delegator rewards for a specific epoch"
+        },
+        {
+          "info": {
+            "name": "MEV rewards from Jito for a range of epochs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/mev-rewards",
+            "params": [
+              {
+                "name": "startEpoch",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endEpoch",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "MEV rewards from Jito for a range of epochs"
+        },
+        {
+          "info": {
+            "name": "Current block compute units utilization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/compute-units",
+            "params": [
+              {
+                "name": "slot",
+                "value": "",
+                "type": "query",
+                "description": "Specific slot (default: latest)"
+              }
+            ]
+          },
+          "docs": "Current block compute units utilization"
+        },
+        {
+          "info": {
+            "name": "Historical compute units utilization time series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/compute-units/history",
+            "params": [
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Rollup interval in minutes"
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points"
+              }
+            ]
+          },
+          "docs": "Historical compute units utilization time series"
+        },
+        {
+          "info": {
+            "name": "Leader slot statistics (blocks produced, missed, skip rate)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/leader-slots",
+            "params": [
+              {
+                "name": "epoch",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Leader slot statistics (blocks produced, missed, skip rate)"
+        },
+        {
+          "info": {
+            "name": "Real-time network performance (TPS, block time, compute units)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/sidecar-stats",
+            "params": [
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of data points"
+              },
+              {
+                "name": "smooth",
+                "value": "",
+                "type": "query",
+                "description": "Smoothing window"
+              }
+            ]
+          },
+          "docs": "Real-time network performance (TPS, block time, compute units)"
+        },
+        {
+          "info": {
+            "name": "Historical network performance (TPS, block time, compute utilization)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/network-stats/history",
+            "params": [
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hours",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Historical network performance (TPS, block time, compute utilization)"
+        },
+        {
+          "info": {
+            "name": "All delegators with stake amounts and account details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://parafi.tech/api/solana/delegators",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "All delegators with stake amounts and account details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
