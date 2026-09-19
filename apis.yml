@@ -51,6 +51,18 @@ tags:
 - Blockchain
 - Digital Assets
 - Staking
+- Validator
+- Solana
+- Ethereum
+- Avalanche
+- DeFi
+- Market Data
+tags_raw:
+- Company
+- Fintech
+- Blockchain
+- Digital Assets
+- Staking
 - Validators
 - Solana
 - Ethereum
@@ -101,6 +113,8 @@ apis:
   humanURL: https://parafi.tech/api-docs
   baseURL: https://parafi.tech/api
   tags:
+  - Markets
+  tags_raw:
   - Market
   properties:
   - type: OpenAPI
