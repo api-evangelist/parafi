@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ParaFi Tech Avalanche Ethereum API
+  title: ParaFi Tech Ethereum API
   version: 1.1.0
   description: Public read-only API for ParaFi validator data, Solana rewards and network metrics, Ethereum network stats, Avalanche validator data, and market prices. Designed for dashboards, agents, and programmatic integrations.
   termsOfService: https://parafi.tech/terms

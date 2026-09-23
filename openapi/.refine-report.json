@@ -1,10 +1,7 @@
 {
   "provider": "parafi",
   "sources": [
-    "parafi-avalanche-api-openapi.yml",
-    "parafi-ethereum-api-openapi.yml",
-    "parafi-market-api-openapi.yml",
-    "parafi-solana-api-openapi.yml"
+    "_original/parafi-openapi.json"
   ],
   "outputs": [
     "parafi-avalanche-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "parafi-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "parafi-avalanche-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "parafi-ethereum-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "parafi-market-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "parafi-solana-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: ParaFi Tech Avalanche API
   version: 1.1.0
@@ -75,23 +75,6 @@ paths:
           description: The configured and official Avalanche RPCs failed
 components:
   schemas:
-    AvalancheSupplyResponse:
-      type: object
-      properties:
-        supplyNanoAvax:
-          type: string
-          pattern: ^\d+$
-          description: Current AVAX supply upper bound in nanoAVAX
-        height:
-          type: string
-          description: P-Chain height when supplied by the RPC
-        source:
-          type: string
-          enum:
-          - avalanche-rpc
-      required:
-      - supplyNanoAvax
-      - source
     AvalancheValidatorsResponse:
       type: object
       properties:
@@ -118,6 +101,23 @@ components:
           enum:
           - fresh
           - redis
+    AvalancheSupplyResponse:
+      type: object
+      properties:
+        supplyNanoAvax:
+          type: string
+          pattern: ^\d+$
+          description: Current AVAX supply upper bound in nanoAVAX
+        height:
+          type: string
+          description: P-Chain height when supplied by the RPC
+        source:
+          type: string
+          enum:
+          - avalanche-rpc
+      required:
+      - supplyNanoAvax
+      - source
 externalDocs:
   description: Agent guide and integration entrypoints
   url: https://parafi.tech/skill.md
