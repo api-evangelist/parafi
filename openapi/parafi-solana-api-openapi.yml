@@ -774,6 +774,55 @@ paths:
           description: Failed to fetch delegators
 components:
   schemas:
+    NetworkAPYData:
+      type: object
+      properties:
+        apy:
+          type: number
+        inflationAPY:
+          type: number
+        mevAPY:
+          type: number
+        averageCommission:
+          type: number
+        stakingRatio:
+          type: number
+        lastUpdated:
+          type: string
+          format: date-time
+        cacheSource:
+          type: string
+          enum:
+          - redis
+          - fresh
+        isStale:
+          type: boolean
+      required:
+      - apy
+      - inflationAPY
+      - mevAPY
+      - averageCommission
+      - stakingRatio
+      - lastUpdated
+    ComputeUnitsData:
+      type: object
+      properties:
+        slot:
+          type: integer
+        computeUnitsConsumed:
+          type: integer
+        computeUnitsTotal:
+          type: integer
+        utilizationPercentage:
+          type: number
+        timestamp:
+          type: string
+          format: date-time
+      required:
+      - slot
+      - computeUnitsConsumed
+      - computeUnitsTotal
+      - utilizationPercentage
     ActiveStakeData:
       type: object
       properties:
@@ -807,43 +856,6 @@ components:
       - lastVote
       - epochVoteAccount
       - delinquent
-      - lastUpdated
-    TotalStakeData:
-      type: object
-      properties:
-        totalStake:
-          type: integer
-          description: Lamports
-        totalStakeInSol:
-          type: number
-        totalStakeAccounts:
-          type: integer
-        activeStakeAccounts:
-          type: integer
-        delegatorCount:
-          type: integer
-        activeStake:
-          type: integer
-        inactiveStake:
-          type: integer
-        delegatedStake:
-          type: integer
-        lastUpdated:
-          type: string
-          format: date-time
-        cacheSource:
-          type: string
-          enum:
-          - redis
-          - fresh
-        isStale:
-          type: boolean
-      required:
-      - totalStake
-      - totalStakeInSol
-      - totalStakeAccounts
-      - activeStakeAccounts
-      - delegatorCount
       - lastUpdated
     SimpleRewardsEpochResponse:
       type: object
@@ -939,198 +951,6 @@ components:
             lastUpdated:
               type: string
               format: date-time
-    APYData:
-      type: object
-      properties:
-        apy:
-          type: number
-        apr:
-          type: number
-        epoch:
-          type: integer
-        hasMevData:
-          type: boolean
-        inflationRewards:
-          type: number
-        mevRewards:
-          type: number
-        totalRewards:
-          type: number
-        lastUpdated:
-          type: string
-          format: date-time
-        cacheSource:
-          type: string
-          enum:
-          - redis
-          - fresh
-        dataSource:
-          type: string
-          enum:
-          - calculated
-          - estimated
-        mevDataAge:
-          type: string
-          enum:
-          - current
-          - previous
-          - fallback
-      required:
-      - apy
-      - apr
-      - epoch
-      - hasMevData
-      - inflationRewards
-      - mevRewards
-      - totalRewards
-      - lastUpdated
-      - dataSource
-    DelegatorsData:
-      type: object
-      properties:
-        delegators:
-          type: array
-          items:
-            type: object
-        totalStake:
-          type: integer
-        totalStakeInSol:
-          type: number
-        totalStakeAccounts:
-          type: integer
-        activeStakeAccounts:
-          type: integer
-        delegatorCount:
-          type: integer
-        lastUpdated:
-          type: string
-          format: date-time
-        cacheSource:
-          type: string
-          enum:
-          - redis
-          - fresh
-        isStale:
-          type: boolean
-      required:
-      - delegators
-      - totalStake
-      - delegatorCount
-      - lastUpdated
-    NetworkValidatorsData:
-      type: object
-      properties:
-        activeValidators:
-          type: integer
-        totalValidators:
-          type: integer
-        delinquentValidators:
-          type: integer
-        activePercentage:
-          type: number
-        rpcNodes:
-          type: integer
-        totalNodes:
-          type: integer
-        lastUpdated:
-          type: string
-          format: date-time
-        cacheSource:
-          type: string
-          enum:
-          - redis
-          - fresh
-        isStale:
-          type: boolean
-      required:
-      - activeValidators
-      - totalValidators
-      - delinquentValidators
-      - activePercentage
-      - rpcNodes
-      - totalNodes
-      - lastUpdated
-    NetworkSupplyData:
-      type: object
-      properties:
-        circulating:
-          type: integer
-          description: Lamports
-        nonCirculating:
-          type: integer
-          description: Lamports
-        total:
-          type: integer
-          description: Lamports
-        circulatingSOL:
-          type: number
-        nonCirculatingSOL:
-          type: number
-        totalSOL:
-          type: number
-        lastUpdated:
-          type: string
-          format: date-time
-        cacheSource:
-          type: string
-          enum:
-          - redis
-          - fresh
-        isStale:
-          type: boolean
-      required:
-      - circulating
-      - nonCirculating
-      - total
-      - circulatingSOL
-      - nonCirculatingSOL
-      - totalSOL
-      - lastUpdated
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        limit:
-          type: integer
-        totalPages:
-          type: integer
-        totalCount:
-          type: integer
-        hasNext:
-          type: boolean
-        hasPrev:
-          type: boolean
-    NetworkAPYData:
-      type: object
-      properties:
-        apy:
-          type: number
-        inflationAPY:
-          type: number
-        mevAPY:
-          type: number
-        averageCommission:
-          type: number
-        stakingRatio:
-          type: number
-        lastUpdated:
-          type: string
-          format: date-time
-        cacheSource:
-          type: string
-          enum:
-          - redis
-          - fresh
-        isStale:
-          type: boolean
-      required:
-      - apy
-      - inflationAPY
-      - mevAPY
-      - averageCommission
-      - stakingRatio
-      - lastUpdated
     RewardEntry:
       type: object
       properties:
@@ -1191,6 +1011,88 @@ components:
           type: string
           enum:
           - balance_difference
+    NetworkSupplyData:
+      type: object
+      properties:
+        circulating:
+          type: integer
+          description: Lamports
+        nonCirculating:
+          type: integer
+          description: Lamports
+        total:
+          type: integer
+          description: Lamports
+        circulatingSOL:
+          type: number
+        nonCirculatingSOL:
+          type: number
+        totalSOL:
+          type: number
+        lastUpdated:
+          type: string
+          format: date-time
+        cacheSource:
+          type: string
+          enum:
+          - redis
+          - fresh
+        isStale:
+          type: boolean
+      required:
+      - circulating
+      - nonCirculating
+      - total
+      - circulatingSOL
+      - nonCirculatingSOL
+      - totalSOL
+      - lastUpdated
+    APYData:
+      type: object
+      properties:
+        apy:
+          type: number
+        apr:
+          type: number
+        epoch:
+          type: integer
+        hasMevData:
+          type: boolean
+        inflationRewards:
+          type: number
+        mevRewards:
+          type: number
+        totalRewards:
+          type: number
+        lastUpdated:
+          type: string
+          format: date-time
+        cacheSource:
+          type: string
+          enum:
+          - redis
+          - fresh
+        dataSource:
+          type: string
+          enum:
+          - calculated
+          - estimated
+        mevDataAge:
+          type: string
+          enum:
+          - current
+          - previous
+          - fallback
+      required:
+      - apy
+      - apr
+      - epoch
+      - hasMevData
+      - inflationRewards
+      - mevRewards
+      - totalRewards
+      - lastUpdated
+      - dataSource
     LeaderSlotsData:
       type: object
       properties:
@@ -1215,25 +1117,123 @@ components:
       - blocksMissed
       - skipRate
       - epoch
-    ComputeUnitsData:
+    TotalStakeData:
       type: object
       properties:
-        slot:
+        totalStake:
           type: integer
-        computeUnitsConsumed:
-          type: integer
-        computeUnitsTotal:
-          type: integer
-        utilizationPercentage:
+          description: Lamports
+        totalStakeInSol:
           type: number
-        timestamp:
+        totalStakeAccounts:
+          type: integer
+        activeStakeAccounts:
+          type: integer
+        delegatorCount:
+          type: integer
+        activeStake:
+          type: integer
+        inactiveStake:
+          type: integer
+        delegatedStake:
+          type: integer
+        lastUpdated:
           type: string
           format: date-time
+        cacheSource:
+          type: string
+          enum:
+          - redis
+          - fresh
+        isStale:
+          type: boolean
       required:
-      - slot
-      - computeUnitsConsumed
-      - computeUnitsTotal
-      - utilizationPercentage
+      - totalStake
+      - totalStakeInSol
+      - totalStakeAccounts
+      - activeStakeAccounts
+      - delegatorCount
+      - lastUpdated
+    NetworkValidatorsData:
+      type: object
+      properties:
+        activeValidators:
+          type: integer
+        totalValidators:
+          type: integer
+        delinquentValidators:
+          type: integer
+        activePercentage:
+          type: number
+        rpcNodes:
+          type: integer
+        totalNodes:
+          type: integer
+        lastUpdated:
+          type: string
+          format: date-time
+        cacheSource:
+          type: string
+          enum:
+          - redis
+          - fresh
+        isStale:
+          type: boolean
+      required:
+      - activeValidators
+      - totalValidators
+      - delinquentValidators
+      - activePercentage
+      - rpcNodes
+      - totalNodes
+      - lastUpdated
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        totalPages:
+          type: integer
+        totalCount:
+          type: integer
+        hasNext:
+          type: boolean
+        hasPrev:
+          type: boolean
+    DelegatorsData:
+      type: object
+      properties:
+        delegators:
+          type: array
+          items:
+            type: object
+        totalStake:
+          type: integer
+        totalStakeInSol:
+          type: number
+        totalStakeAccounts:
+          type: integer
+        activeStakeAccounts:
+          type: integer
+        delegatorCount:
+          type: integer
+        lastUpdated:
+          type: string
+          format: date-time
+        cacheSource:
+          type: string
+          enum:
+          - redis
+          - fresh
+        isStale:
+          type: boolean
+      required:
+      - delegators
+      - totalStake
+      - delegatorCount
+      - lastUpdated
 externalDocs:
   description: Agent guide and integration entrypoints
   url: https://parafi.tech/skill.md

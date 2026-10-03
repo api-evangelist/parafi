@@ -56,13 +56,6 @@ paths:
                     fromCache: true
 components:
   schemas:
-    SimpleUSD:
-      type: object
-      properties:
-        usd:
-          type: number
-      required:
-      - usd
     PriceData:
       type: object
       additionalProperties: false
@@ -75,6 +68,13 @@ components:
           $ref: '#/components/schemas/SimpleUSD'
         aptos:
           $ref: '#/components/schemas/SimpleUSD'
+    SimpleUSD:
+      type: object
+      properties:
+        usd:
+          type: number
+      required:
+      - usd
 externalDocs:
   description: Agent guide and integration entrypoints
   url: https://parafi.tech/skill.md
