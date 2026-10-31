@@ -64,6 +64,122 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Parafi is a company surfaced as a portfolio company of bain-capital-ventures and added to the API Evangelist network as a stub for enrichment. Sector: fintech. This profile is a lead awaiting the enrichment pipeline.
+ParaFi is a blockchain and digital-asset investment firm (ParaFi Capital) whose technology division, ParaFi Tech (parafi.tech), operates staking validators across Solana, Ethereum, Avalanche, and Aptos and publishes a free, public, read-only REST API for on-chain staking and network data. The ParaFi Tech API (OpenAPI 3.0.3, 23 GET operations, no authentication) serves validator APY/APR and MEV contribution, Solana delegator rewards by staker/validator/epoch, active-stake and delegator breakdowns, real-time and historical network health (TPS, block time, compute units, leader slots), Ethereum and Avalanche network stats, and CoinGecko-backed token prices. It is explicitly designed for dashboards, AI agents, and programmatic integrations, shipping llms.txt, an extended llms-full.txt, and a skill.md agent guide alongside the OpenAPI.
 
-Backed by: bain-capital-ventures — https://parafi.com/
+**Areas:** Company · Fintech · Blockchain · Digital Assets · Staking · Validator · Solana · Ethereum · Avalanche · DeFi · Market Data
+
+## Parafi on APIs.io
+
+Everything profiled for Parafi is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/parafi/](https://apis.io/providers/parafi/)** — or go straight to one of the APIs or properties below.
+
+### APIs (4)
+
+- [Parafi Avalanche API](https://apis.io/apis/parafi/parafi-avalanche-api/) — Avalanche validator and network supply endpoints.
+- [Parafi Ethereum API](https://apis.io/apis/parafi/parafi-ethereum-api/) — Ethereum network and sidecar metrics.
+- [Parafi Market API](https://apis.io/apis/parafi/parafi-market-api/) — Token price endpoints for supported assets.
+- [Parafi Solana API](https://apis.io/apis/parafi/parafi-solana-api/) — ParaFi validator, rewards, stake, and Solana network endpoints.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [parafi-tech](https://apis.io/servers/parafi/parafi-tech/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Parafi Agentic Access](https://apis.io/agentic-access/parafi/parafi-agentic-access/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [ParaFi Tech Avalanche API](https://apis.io/collections/parafi/open-parafi-avalanche-api/)
+- [ParaFi Tech Avalanche Ethereum API](https://apis.io/collections/parafi/open-parafi-ethereum-api/)
+- [ParaFi Tech Avalanche Market API](https://apis.io/collections/parafi/open-parafi-market-api/)
+- [ParaFi Tech Avalanche Solana API](https://apis.io/collections/parafi/open-parafi-solana-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Parafi Openapi Overlay](https://apis.io/overlays/parafi/parafi-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Parafi Authentication](https://apis.io/security/parafi/parafi-authentication/)
+- [Parafi Domain Security](https://apis.io/security/parafi/parafi-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://parafi.com/)
+- [Documentation](https://parafi.tech/api-docs)
+- [Getting started](https://parafi.tech/solana/integration-guide)
+- [API reference](https://parafi.tech/api-docs)
+- [Blog](https://parafi.com/library)
+- [Terms of service](https://parafi.tech/terms)
+- [Privacy policy](https://parafi.tech/privacy)
+
+## API Evangelist rating
+
+**Kin Score 42.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 39.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 57.1 |
+
+**Agent readiness 28.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 23.1** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/parafi/](https://apis.io/providers/parafi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Parafi: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/parafi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
